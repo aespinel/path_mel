@@ -1,11 +1,10 @@
 CACHE MANIFEST
-# 2012-11-1 v2.0.34
+# 2012-11-1 v2.0.35
 CACHE:
 /media/coco/app/scripts/libs/bootstrap/css/bootstrap.css
 /media/coco/app/scripts/libs/bootstrap/css/bootstrap-responsive.css
 /media/coco/app/scripts/libs/datatablejs_media/css/demo_table.css
 /media/coco/app/scripts/libs/bootstrap/img/glyphicons-halflings.png 
-/media/img/admin/nav-bg.gif  
 /media/coco/app/styles/css/coco.css
 /media/coco/app/styles/css/datepicker.css
 /media/coco/app/styles/css/bootstrap-timepicker.css
@@ -14,6 +13,7 @@ CACHE:
 
 /media/coco/dist/scripts/main.js
 /media/coco/app/scripts/libs/require.js
+/media/configs.js
 
 /media/coco/app/scripts/libs/datatablejs_media/images/back_disabled.png
 /media/coco/app/scripts/libs/datatablejs_media/images/back_enabled_hover.png
