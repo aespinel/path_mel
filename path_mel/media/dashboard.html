@@ -388,6 +388,44 @@
 
                                 <!--Core Framework templates end here -->    
 
+<!--///////////////////////////////////////////////////// VILLAGE TEMPLATES START ///////////////////////////////////////////-->
+
+<script type="text/template" id="village_table_template">
+       <tr>
+       <th>Id</th>
+	   <th>Name</th>
+	   <th></th>
+	   </tr>
+</script>
+<script type="text/template" id="village_list_item_template">
+    <tr>
+    <%if(typeof(online_id)!="undefined"){%>
+        <td><%= online_id %></td>
+    <%}else{%>    
+        <td>Not uploaded</td>
+    <%}%>        
+    <td><%= name %></td>
+    <td>
+	<a href="#village/edit/<%= id %>" class="edit" title="Edit this entry"><i class="icon-pencil" title="Edit entry"></i></a>
+	</td>
+    </tr>
+</script>
+<script type="text/template" id="village_add_edit_template">
+    <fieldset>
+        <legend>Add Village</legend>
+		<p class="bold-helptext"> All fields in bold are required</p>
+        <div class="control-group"> 
+		<label class="control-label coco_required">Name</label>
+        	<div class="controls">
+         	<input type="text" name="name" placeholder="Name">
+         	</div>
+         </div>
+                 
+    </fieldset>
+</script>
+
+<!--/////////////////////////////////////////////////// VILLAGE TEMPLATES END ///////////////////////////////////////////////-->
+
 
 <!--///////////////////////////////////////////////////// MEDIATOR TEMPLATES START ///////////////////////////////////////////-->
 
@@ -433,7 +471,7 @@
          	</div>
          </div>
          <div class="control-group coco_required"> 
-             <label class="control-label">Assigned Villages</label>
+             <label class="control-label">Villages</label>
              <div class="controls"> 
              <select id = "id_villages" name="villages" class = "chzn-select" multiple>
             
@@ -531,9 +569,9 @@
 			               	    </div>
 			               </div>
 			               <div class="control-group"> 
-							<label class="control-label required">Videos Screened</label>
+							<label class="control-label required">Video</label>
 			                	<div class="controls"> 
-			                	<select multiple="multiple" name="videoes_screened" id = "id_videoes_screened" class="chzn-select">
+			                	<select multiple="multiple" name="video" id = "id_video" class="chzn-select">
 			                        </select> 
 			                    </div>
 			                </div>
