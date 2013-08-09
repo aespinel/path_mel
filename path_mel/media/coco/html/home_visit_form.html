@@ -1,0 +1,51 @@
+<html>
+<head>
+<link rel="stylesheet" href="../app/scripts/libs/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="../app/styles/css/coco.css">
+</head>
+<body>
+	<div id="form">
+		<div>
+			<div id="form_div">
+				<form name="person" class="">
+                    <fieldset>
+                        <legend>Edit Adoption</legend>
+                        <div class="control-group">
+                            <label class="control-label coco-required">Person</label>
+                            <div class="controls"> 
+                                <select name="person" id="id_person" class="chzn-select">
+                                    <option value="">----------</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group"> 
+                            <label class="control-label coco-required">Date of delivery</label>
+                            <div class="controls">
+                                <input class="input-small date-picker" id="date" type="text" placeholder="Date" name="date_of_adoption">
+                            </div>
+                            <span class="help-block">Date should be in the format of yyyy-mm-dd.</span>
+                        </div>
+                        <div class="control-group"> 
+                            <label class="control-label coco-required">Date of visit</label>
+                            <div class="controls">
+                                <input class="input-small date-picker" id="date" type="text" placeholder="Date" name="date_of_adoption">
+                            </div>
+                            <span class="help-block">Date should be in the format of yyyy-mm-dd.</span>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label coco-required">ASHA</label>
+                            <div class="controls"> 
+                                <select name="animator" id="id_animator" class="chzn-select">
+                                    <option value='' selected='selected'>---------</option> 
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+<script type='text/javascript'>
+</script>
+</body>
+</html>
