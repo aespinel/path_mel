@@ -1,4 +1,6 @@
+import datetime
 from django.db import models
+from log.utils import delete_log, save_log
 
 class Village(models.Model):
     name = models.CharField(max_length=100)
@@ -28,13 +30,19 @@ class Person(models.Model):
     village = models.ForeignKey(Village)
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.other_name)
+models.signals.post_save.connect(save_log, sender = Person)
+models.signals.pre_delete.connect(delete_log, sender = Person)
 
 class Mediator(models.Model):
     name = models.CharField(max_length=100)
     villages = models.ManyToManyField(Village)
+models.signals.post_save.connect(save_log, sender = Mediator)
+models.signals.pre_delete.connect(delete_log, sender = Mediator)
 
 class Video(models.Model):
     title = models.CharField(max_length=100)
+models.signals.post_save.connect(save_log, sender = Video)
+models.signals.pre_delete.connect(delete_log, sender = Video)
 
 class Dissemination(models.Model):
     date = models.DateField()
@@ -54,6 +62,8 @@ class Dissemination(models.Model):
     total_lactating_women = models.PositiveIntegerField()
     
     attendance_records = models.ManyToManyField(Person, through='Attendance')
+models.signals.post_save.connect(save_log, sender = Dissemination)
+models.signals.pre_delete.connect(delete_log, sender = Dissemination)
 
 class Attendance(models.Model):
     person = models.ForeignKey(Person)
@@ -61,5 +71,3 @@ class Attendance(models.Model):
     question_asked = models.CharField(max_length=200)
     liked = models.BooleanField()
 
-
-    

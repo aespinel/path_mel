@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'south',
+    'log',
     'coco',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
