@@ -26,7 +26,7 @@
 
 <script type="text/template" id="header">
 <div class="page-header" style="margin-bottom:0px;">
-    <h1 ><a href="#">COCO</a></h1>
+    <h1 ><a href="#">PATH-MEL</a></h1>
     <ul class="breadcrumb">
     <%=breadcrumb%>
     </ul>
@@ -194,7 +194,7 @@
 <script type="text/template" id="status">
     <div id="modal"></div>
 	<div class="page-header">
-	    <h1 style = "color:#0088cc;"> Welcome to COCO!
+	    <h1 style = "color:#0088cc;"> Welcome to PATH-MEL!
             <br>
                 <small>COCO helps you to seamlessly enter data in conditions of intermittent connectivity.</small>
             </br>
@@ -395,7 +395,7 @@
        <tr>
        <th>Id</th>
 	   <th>Name</th>
-	   <th>Assigned Villages</th>
+	   <th>Village</th>
        <th></th>
 	   </tr>
 </script>
@@ -410,7 +410,7 @@
     <td> 
 		<% 
 			var villages=[];
-			$.each(assigned_villages, function(index,val) {
+			$.each(villages, function(index,val) {
 				villages.push(val.village_name.trim());
      		});
 			villages.sort();
@@ -427,61 +427,35 @@
         <legend>Add Mediator</legend>
 		<p class="bold-helptext"> All fields in bold are required</p>
         <div class="control-group"> 
-		<label class="control-label"><b>Name</b></label>
+		<label class="control-label coco_required">Name</label>
         	<div class="controls">
          	<input type="text" name="name" placeholder="Name">
          	</div>
          </div>
-         <div class="control-group"> 
-            <label class="control-label"><b>Gender</b></label>
-            <div class="controls">
-            <select name="gender">
-    			<option value='' selected='selected'>---------</option> 
-    			<option value='M'>Male</option> 
-    			<option value='F'>Female</option> 
-            </select>
-            </div>
-         </div> 
-         <div class="control-group"> 
-             <label class="control-label"><b>Assigned Villages</b></label>
+         <div class="control-group coco_required"> 
+             <label class="control-label">Assigned Villages</label>
              <div class="controls"> 
-             <select id = "id_ass_villages" name="assigned_villages" class = "chzn-select" multiple>
+             <select id = "id_villages" name="villages" class = "chzn-select" multiple>
             
             </select>
             </div>
         </div>
-        <div class="control-group"> 
-            <label class="control-label"><b>District</b></label>
-            <div class="controls"> 
-                <select id = "id_district" name="district" class = "chzn-select">
-           
-               </select>
-           </div>
-       </div>
-        <div class="control-group">
-             <label class="control-label">Phone Number</label>
-             <div class="controls">
-             <input name="phone_no" type="text" placeholder="Phone Number">
-             </div>
-         </div>
+        
     </fieldset>
 </script>
 
 <!--/////////////////////////////////////////////////// MEDIATOR TEMPLATES END ///////////////////////////////////////////////-->
 
 <!--///////////////////////////////////////////////// SCREENING TEMPLATES START //////////////////////////////////////////////-->
-<script type="text/template" id="screening_table_template">
+<script type="text/template" id="dissemination_table_template">
        <tr>
        <th>Id</th>
 	   <th>Date</th>
 	   <th>Mediator</th>
-       <th>Village</th>
-	   <th>Groups Attended</th>
-       <th>Videos Screened</th>
-       <th></th>
+       <th>Video</th>
 	   </tr>
 </script>
-<script type="text/template" id="screening_list_item_template">
+<script type="text/template" id="dissemination_list_item_template">
     <tr>
     <%if(typeof(online_id)!="undefined"){%>
         <td><%= online_id %></td>
@@ -511,101 +485,137 @@
 	</td>
     
     <td>
-	<a href="#screening/edit/<%= id %>" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a>
+	<a href="#dissemination/edit/<%= id %>" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a>
     </td>
     </tr>
 </script>
-<script type="text/template" id="screening_add_edit_template">
-            <fieldset>
-                <legend>Add Screening</legend>
-				<p class="bold-helptext"> All fields in bold are required</p>
-                <div class="control-group"> 
-			<label class="control-label"><b>Date</b></label>
-                	<div class="controls">
-                 	<input class="date-picker input-small" id="date" type="text" placeholder="Date" name="date">  
-                 	</div>
-                 	<span class="help-block">Enter the date in the form of YYYY-MM-DD</span>
-                 </div>
-                 <div class="control-group ">
-			<label class="control-label"><b>Start Time</b></label>
-                 	<div class="controls bootstrap-timepicker">
-				<input class="time-picker input-mini" id="start_time" type="text" placeholder="hh:mm" name="start_time">
-                 	</div>
-                 	<span class="help-block">Enter the time in the form of HH:MM. Use 24 hour format</span>
-                 </div>
-                 <div class="control-group "> 
-			<label class="control-label"><b>End Time</b></label>
-                 	<div class="controls bootstrap-timepicker"> 
-                 		<input class="time-picker input-mini" id="end_time_picker" type="text" placeholder="hh:mm" name="end_time">
-                 	</div>
-                 	<span class="help-block">Enter the time in the form of HH:MM. Use 24 hour format</span>
-                 </div>
-                 <div class="control-group">
-			<label class="control-label"><b>Village</b></label>
-                	<div class="controls"> 
-                	<select name="village" id="id_village" class="chzn-select" placeholder="Enter animator to enable">
-                    <option value='' selected='selected'>---------</option> 
-                    </select>
-                	</div>
-                </div>
-                <div class="control-group">
-			<label class="control-label"><b>Mediator</b></label>
-                 	<div class="controls"> 
-                 	<select name="animator" id="id_animator" class="chzn-select">
-                       <option value='' selected='selected'>---------</option> 
-     				</select > 
-               	    </div>
-               </div>
-               <div class="control-group"> 
-			<label class="control-label"><b>Videos Screened</b></label>
-                	<div class="controls"> 
-                	<select multiple="multiple" name="videoes_screened" id = "id_videoes_screened" class="chzn-select">
-                        </select> 
-                    </div>
-                </div>
-                <div class="control-group">
-			<label><b>Groups Attended</b></label>
-                    <div class="controls">
-                        <select id="id_group"  name = "farmer_groups_targeted" multiple="multiple" class="chzn-select"></select> 
-                    </div>
-                </div>
-                <div class="control-group">
-                	<label>Person</label>
-                	<div class="controls">
-                        <select id="id_person" name = "person" class="chzn-select" multiple="multiple"></select>
-                    </div>
-                </div>
-                    <br>
-            </fieldset>
-            <fieldset class = "inline_table">
-            	<h5>Attendance</h5>
-                <table id="pma_table" class="table">
-                    <thead>
-                        <tr>
-                            <th class="notbold">
-                                Delete?
-                            </th>
-                            <th class="notbold">
-                                No.
-                            </th>
-                            <th class="notbold">
-                                Person
-                            </th>
-                            <th class="notbold">
-                                Expressed Adopted Video
-                            </th>
-                            <th class="notbold">
-                                Question Asked
-                            </th>
-                            <th class="notbold">
-                                Interested?
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="pmas">
-                    </tbody>
-                </table>
-            </fieldset>
+<script type="text/template" id="dissemination_add_edit_template">
+            		<fieldset>
+			                <legend>Add Dissemination</legend>
+							<p class="bold-helptext"> All fields in bold are required</p>
+			                <div class="control-group"> 
+						<label class="control-label required">Date</label>
+			                	<div class="controls">
+			                 	<input class="date-picker input-small" id="date" type="text" placeholder="Date" name="date">  
+			                 	</div>
+			                 	<span class="help-block">Enter the date in the form of YYYY-MM-DD</span>
+			                 </div>
+			                 <div class="control-group ">
+						<label class="control-label required">Start Time</label>
+			                 	<div class="controls bootstrap-timepicker">
+							<input class="time-picker input-mini" id="start_time" type="text" placeholder="hh:mm" name="start_time">
+			                 	</div>
+			                 	<span class="help-block">Enter the time in the form of HH:MM. Use 24 hour format</span>
+			                 </div>
+			                 <div class="control-group "> 
+						<label class="control-label required">End Time</label>
+			                 	<div class="controls bootstrap-timepicker"> 
+			                 		<input class="time-picker input-mini" id="end_time_picker" type="text" placeholder="hh:mm" name="end_time">
+			                 	</div>
+			                 	<span class="help-block">Enter the time in the form of HH:MM. Use 24 hour format</span>
+			                 </div>
+			                 <div class="control-group">
+						<label class="control-label required">Village</label>
+			                	<div class="controls"> 
+			                	<select name="village" id="id_village" class="chzn-select" placeholder="Enter animator to enable">
+			                    <option value='' selected='selected'>---------</option> 
+			                    </select>
+			                	</div>
+			                </div>
+			                <div class="control-group">
+								<label class="control-label required">Mediator</label>
+			                 	<div class="controls"> 
+			                 	<select name="animator" id="id_animator" class="chzn-select">
+			                       <option value='' selected='selected'>---------</option> 
+			     				</select > 
+			               	    </div>
+			               </div>
+			               <div class="control-group"> 
+							<label class="control-label required">Videos Screened</label>
+			                	<div class="controls"> 
+			                	<select multiple="multiple" name="videoes_screened" id = "id_videoes_screened" class="chzn-select">
+			                        </select> 
+			                    </div>
+			                </div>
+			                
+			                <div class="control-group">
+								<label class="control-label coco-required">Song</label>
+			                 	<div class="controls"> 
+			                 	<select name="Song" id="id_song" class="chzn-select">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Yes</option>
+			                       <option value=''>No</option> 
+			     				</select > 
+			               	    </div>
+			               </div>
+			               
+			               <div class="control-group">
+								<label class="control-label coco-required">Game</label>
+			                 	<div class="controls"> 
+			                 	<select name="game" id="id_game" class="chzn-select">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Yes</option>
+			                       <option value=''>No</option> 
+			     				</select > 
+			               	    </div>
+			               </div>
+			                
+			                <div class="control-group">
+				            	<label class="control-label">Total HH Covered</label>
+				            	<div class="controls"> 
+				            	<input class="input-mini" name="total_hh" type="text" placeholder="Total HH Covered">
+				            	</div>
+				            </div>
+				            
+				             <div class="control-group">
+				            	<label class="control-label">Total New HH Covered</label>
+				            	<div class="controls"> 
+				            	<input class="input-mini" name="total_new_hh" type="text" placeholder="Total New HH Covered">
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">Total Currently Pregnant Women</label>
+				            	<div class="controls"> 
+				            	<input class="input-mini" name="total_pm" type="text" placeholder="Total Currently Pregnant Women">
+				            	</div>
+				            </div>
+				            
+				             <div class="control-group">
+				            	<label class="control-label">Total Currently Lactating Women</label>
+				            	<div class="controls"> 
+				            	<input class="input-mini" name="total_lm" type="text" placeholder="Total Currently Lactating Women">
+				            	</div>
+				            </div>
+			                
+			            <br>
+			            </fieldset>
+			            <fieldset class = "inline_table">
+			            	<h5>Attendance</h5>
+			                <table id="pma_table" class="table">
+			                    <thead>
+			                        <tr>
+			                            <th class="notbold">
+			                                Delete?
+			                            </th>
+			                            <th class="notbold">
+			                                No.
+			                            </th>
+			                            <th class="notbold">
+			                                Person
+			                            </th>
+			                            <th class="notbold">
+			                                Question Asked
+			                            </th>
+			                            <th class="notbold">
+			                                Interested?
+			                            </th>
+			                        </tr>
+			                    </thead>
+			                    <tbody id="pmas">
+			                    </tbody>
+			                </table>
+			            </fieldset>
 </script>
 
 <script type="text/template" id="person_pma_template">
@@ -639,22 +649,6 @@
         <td>
             <div class="control-group">
                 <div class="controls">
-                    <select  name="expressed_adoption_video" class="chzn-select">
-                        <option value>--------</option>
-                        <%if(typeof(videos_seen)!="undefined"){ _.each(videos_seen, function(vid) {
-                            if(typeof(expressed_adoption_video)!="undefined" && vid.id == expressed_adoption_video.id){
-                             %> 
- 							<option selected="selected" value= "<%= vid.id%>"><%= vid.title %></option> 
-                            <%}else{%>
-							<option value= "<%= vid.id%>"><%= vid.title %></option> 
-                        <%}});}%>    
-                    </select>
-                </div>
-            </div>
-        </td>
-        <td>
-            <div class="control-group">
-                <div class="controls">
                 <%if(typeof(expressed_question)!="undefined"){%>
                     <input type="text"  name="expressed_question" value ="<%=expressed_question%>">
                 <%} else{%>
@@ -679,13 +673,11 @@
 <script type="text/template" id="adoption_table_template">
        <tr>
        <th>Id</th>
-	   <th>Date</th>
 	   <th>Person</th>
-	   <th>Group</th>
 	   <th>Village</th>
-       <th>Video</th>
-       <th></th>
-	   
+       <th>Date of delivery</th>
+	   <th>Mediator</th>
+       <th>Date of visit</th>
 	   </tr>
 </script>
 <script type="text/template" id="adoption_list_item_template">
@@ -695,241 +687,363 @@
     <%}else{%>    
         <td>Not uploaded</td>
     <%}%>        
-    <td><%= date_of_adoption %></td>
     <td> <%= person.person_name %></td>
-	<td> <%= group.group_name %></td>
-	<td> <%= village.village_name %></td>
-    <td> <%= video.title %></td>
+    <td> <%= village.village_name %></td>
+	<td><%= date_of_delivery %></td>
+    <td> <%= mediator.name %></td>
+	<td> <%= date_of_visit %></td>
     <td>
 	<a href="#adoption/edit/<%= id %>" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a>
 	</td>
     </tr>
 </script>
-<script type="text/template" id="adoption_edit_template">
-        <fieldset>
-                <legend>Edit Adoption</legend>
-                <div class="control-group">
-			<label class="control-label"><b>Person</b></label>
-                	<div class="controls"> 
-                	<select name="person" id="id_person" class="chzn-select">
-                    <option value="">---------- </option>
-                    </select>
-                    </div>
-                </div>
-                <div class="control-group">
-			<label><b>Video</b></label>
-                    <div class="controls">
-                        <select name="video" id="id_video" class="chzn-select"></select>
-                    </div>
-                </div>
-                <div class="control-group"> 
-			<label class="control-label"><b>Date</b></label>
-                	<div class="controls">
-                        <input class="input-small date-picker" id="date" type="text" placeholder="Date" name="date_of_adoption">  
-                 	</div>
-                 	<span class="help-block">Date should be in the format of yyyy-mm-dd</span>
-                 </div>
-        </fieldset>
-    
-</script>
+
 <script type="text/template" id="adoption_add_template">
-                            <fieldset>
-                                <legend>Add Adoption</legend>
-								<p class="bold-helptext"> All fields in bold are required</p>
-                                <div class="control-group">
-					<label class="control-label"><b>Village</b></label>
-                                	<div class="controls"> 
-                                	<select name="village" id="id_village" class="chzn-select">
-                                    <option value="">---------- </option>
-                                    </select>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-					<label><b>Groups Attended</b></label>
-	                                <div class="controls">
-	                                    <select name="group" id="id_group" multiple="multiple" class="chzn-select"></select>
-	                                </div>
-                                </div>
-                                <div class="control-group">
-                                	<label>Person</label>
-                                	<div class="controls">
-		                                <select name="float_person" id="id_person" multiple="multiple" class="chzn-select"></select>
-	                                </div>
-                                </div>
-                                    <br>
-                            </fieldset>
-                            <fieldset class = "inline_table">
-                            	<h5>Adoptions</h5>
-                                <table id="adoptions_table" class="table">
-                                    <thead>
-                                        <tr>
-                                            <th class= "notbold">
-                                                Delete?
-                                            </th>
-                                            <th class = "notbold">
-                                                Sr No.
-                                            </th>
-                                            <th>
-                                                Person
-                                            </th>
-                                            <th>
-                                                Video
-                                            </th>
-                                            <th>
-                                                Date of Adoption
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="bulk">
-                                    </tbody>
-                                </table>
-                            </fieldset>
-</script>
-
-<script type="text/template" id="adoption_inline_header">
-    <tr> <th> Delete?</th><th> Sr No.</th><th> Person*</th><th>Video</th><th> Date Of Adoption</th></tr>
-</script>
-
-<script type="text/template" id="adoption_inline">
-    <tr class="" index = <%=index%> person_id = <%=id%> name="row<%=index%>">
-    <td>
-    <div class="control-group">
-        <div class="controls">
-            <i class="icon-remove remove" onClick = "javascript:$('tr[index = <%=index%>]').remove();"></i>
-        </div>
-    </div>
-    </td>
-    <td>
-    <div class="control-group">
-        <div class="controls">
-        <input type="text" style="display:none;" id="person_row<%=index%>" name="person<%=index%>" value = "<%=id%>" disabled>
-        <%=index%>
-        </div>
-    </div>
-    </td>
-        <td>
-            <div class="control-group">
-                <div class="controls">
-                    <input type="text" id="person_row<%=index%>" name="person_name<%=index%>" value = "<%=person_name%>" disabled>
-                </div>
-            </div>
-        </td>
-        <td>
-            <div class="control-group">
-                <div class="controls">
-                    <select id = "video<%=index%>" name="video<%=index%>" class="chzn-select" required>
-                        <option value>--------</option>
-                        <%if(typeof(videos_seen)!="undefined"){ _.each(videos_seen, function(vid) {
-                            if(typeof(expressed_adoption_video)!="undefined" && vid.id == expressed_adoption_video.id){
-                             %> 
- 							<option selected="selected" value= "<%= vid.id%>"><%= vid.title %></option> 
-                            <%}else{%>
-							<option value= "<%= vid.id%>"><%= vid.title %></option> 
-                        <%}});}%>    
-                    </select>
-                </div>
-            </div>
-        </td>
-        <td>
-            <div class="control-group">
-                <div class="controls">
-                    <input type="text" class="date-picker input-small inl_date" id="date_of_adoption<%=index%>" name="date_of_adoption<%=index%>" required validateDate>
-                </div>
-            </div>
-        </td>
-        
-    </tr>
+                           <fieldset>
+			                <legend>Add Adoption</legend>
+							<p class="bold-helptext"> All fields in bold are required</p>
+			                <div class="control-group">
+								<label class="control-label required">Village</label>
+			                	<div class="controls"> 
+			                	<select name="village" id="id_village" class="chzn-select">
+			                    <option value='' selected='selected'>---------</option> 
+			                    </select>
+			                	</div>
+			                </div>
+			                
+			                <div class="control-group">
+								<label class="control-label required">Person</label>
+			                	<div class="controls"> 
+			                	<select name="person" id="id_person" class="chzn-select" placeholder="Enter village to enable">
+			                    <option value='' selected='selected'>---------</option> 
+			                    </select>
+			                	</div>
+			                </div>
+			                
+			                <div class="control-group"> 
+								<label class="control-label required">Date Of Delivery</label>
+			                	<div class="controls">
+			                 	<input class="date-picker input-small" id="date_of_delivery" type="text" placeholder="Date Of Delivery" name="date">  
+			                 	</div>
+			                 	<span class="help-block">Enter the date in the form of YYYY-MM-DD</span>
+			                 </div>
+			                 
+			                 <div class="control-group"> 
+								<label class="control-label required">Date Of Visit</label>
+			                	<div class="controls">
+			                 	<input class="date-picker input-small" id="date_of_visit" type="text" placeholder="Date Of Visit" name="date">  
+			                 	</div>
+			                 	<span class="help-block">Enter the date in the form of YYYY-MM-DD</span>
+			                 </div>
+			                
+			                <div class="control-group">
+								<label class="control-label required">Mediator</label>
+			                 	<div class="controls"> 
+			                 	<select name="animator" id="id_animator" class="chzn-select">
+			                       <option value='' selected='selected'>---------</option> 
+			     				</select > 
+			               	    </div>
+			               </div>
+			                
+			                <div class="control-group">
+				            	<label class="control-label">Checked By</label>
+				            	<div class="controls"> 
+				            	<input class="input-mini" name="checked_by" type="text" placeholder="Checked By">
+				            	</div>
+				            </div>
+				            
+			            <br>
+			            </fieldset>
+			            <fieldset>
+			            	<h5>Birth Preparedness</h5>
+			                 <div class="control-group">
+				            	<label class="control-label">Where did you give birth to last child</label>
+				            	<div class="controls"> 
+				            	<select name="place_of_birth" id="place_of_birth">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value='' >Home</option>
+			                       <option value='' >Government Hospital</option>
+			                       <option value='' >Private Hospital</option> 
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">During your last delivery what preparation did you take?</label>
+				            	<div class="controls"> 
+				            	<select name="preparation_of_last_delivery" multiple="multiple" id="preparation_of_last_delivery">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value='' >Make Preparations for emergency transport</option>
+			                       <option value='' >Prepare blade, thread for cord cutting</option>
+			                       <option value='' >Organize clothes for baby</option>
+			                       <option value='' >Clean dry cotton cloth for drying and wrapping the baby</option>
+			                       <option value='' >Save money for an emergency</option> 
+			     				</select > 
+				            	</div>
+				            </div>
+			            </fieldset>
+			            <fieldset>
+			            	<h5>Cord Care</h5>
+			                 <div class="control-group">
+				            	<label class="control-label">How did you handle the cord cutting after birth?</label>
+				            	<div class="controls"> 
+				            	<select name="place_of_birth" id="place_of_birth">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value='' >Used a clean blade</option>
+			                       <option value='' >used a clean cord to tie</option>
+			                       <option value='' >Both</option>
+			                       <option value='' >None of the above</option> 
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">What did you put on the cord after cutting?</label>
+				            	<div class="controls"> 
+				            	<select multiple="multiple" name="preparation_of_last_delivery" id="preparation_of_last_delivery">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Nothing</option>
+			                       <option value=''>Oil/Ghee</option>
+			                       <option value=''>Turmeric</option>
+			                       <option value=''>Ash/mud</option>
+			                       <option value=''>Ointment</option>
+			                       <option value=''>Others</option> 
+			     				</select > 
+				            	</div>
+				            </div>
+			            </fieldset>
+			            
+			            <fieldset>
+			            	<h5>Thermal Care</h5>
+			                 <div class="control-group">
+				            	<label class="control-label">When did you bathe the baby</label>
+				            	<div class="controls"> 
+				            	<select name="place_of_birth" id="place_of_birth">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value='' >Immediately after birth</option>
+			                       <option value='' >After hours</option>
+			                       <option value='' >In 1 day</option>
+			                       <option value='' >Between 3-7 days after birth</option>
+			                       <option value='' >Don't know</option> 
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">Was the baby wiped with a clean cloth?</label>
+				            	<div class="controls"> 
+				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Yes</option>
+			                       <option value=''>No</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">Was the baby wrapped in a dry cloth to keep warm?</label>
+				            	<div class="controls"> 
+				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Yes</option>
+			                       <option value=''>No</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">Did you or your family member hold the baby against your skin birth</label>
+				            	<div class="controls"> 
+				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Yes</option>
+			                       <option value=''>No</option>
+			     				</select > 
+				            	</div>
+				            </div>
+			            </fieldset>
+			            
+			            <fieldset>
+			            	<h5>Optimal Breast Feeding</h5>
+			                 
+				            <div class="control-group">
+				            	<label class="control-label">Did you give the baby colostrums?</label>
+				            	<div class="controls"> 
+				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Yes</option>
+			                       <option value=''>No</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">When did you start breastfeeding?</label>
+				            	<div class="controls"> 
+				            	<select name="place_of_birth" id="place_of_birth">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value='' >Immediately after birth</option>
+			                       <option value='' >In 1 hour</option>
+			                       <option value='' >In 1 day</option>
+			                       <option value='' >3 days</option>
+			                       <option value='' >After 3 days</option> 
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+			            </fieldset>
+			            
+			            <fieldset>
+			            	<h5>Exclusive Breast Feeding</h5>
+			                 
+				            <div class="control-group">
+				            	<label class="control-label">In the first three days after delivery did you give anything to drink other than breast milk?</label>
+				            	<div class="controls"> 
+				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Yes</option>
+			                       <option value=''>No</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">What was given to your child to drink other than breast milk?</label>
+				            	<div class="controls"> 
+				            	<select multiple="multiple" name="place_of_birth" id="place_of_birth">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value='' >Top feeding/milk</option>
+			                       <option value='' >Water</option>
+			                       <option value='' >Janam ghutti</option>
+			                       <option value='' >Honey</option>
+			                       <option value='' >Sugar or glucose water</option>
+			                       <option value='' >Fruit juice</option>
+			                       <option value='' >Gripe water</option>
+			                       <option value='' >Other</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">When do you plan on giving your child water or top milk?</label>
+				            	<div class="controls"> 
+				            	<select name="place_of_birth" id="place_of_birth">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value='' >Right away</option>
+			                       <option value='' >Not before months</option>
+			                       <option value='' >Within months</option>
+			                       <option value='' >Before months</option>
+			                       <option value='' >Not decided</option>
+			                       <option value='' >Other</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+			            </fieldset>
+			            
+			            <fieldset>
+			            	<h5>Family Planning</h5>
+			                 
+				            <div class="control-group">
+				            	<label class="control-label">Are you using a FP method?</label>
+				            	<div class="controls"> 
+				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Yes</option>
+			                       <option value=''>No</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">What FP methods have you used?</label>
+				            	<div class="controls"> 
+				            	<select multiple="multiple" name="place_of_birth" id="place_of_birth">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value='' >LAM</option>
+			                       <option value='' >Pill</option>
+			                       <option value='' >Injection</option>
+			                       <option value='' >IUD/Loop</option>
+			                       <option value='' >Rhythm</option>
+			                       <option value='' >Withdrawal</option>
+			                       <option value='' >Foam/Jelly</option>
+			                       <option value='' >Condoms</option>
+			                       <option value='' >Male sterilization</option>
+			                       <option value='' >Female sterilization</option>
+			                       <option value='' >Others</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">Were you ever told by a health or family planning worker about any
+				            	methods of family planning that you can use to aviod pregnancy?</label>
+				            	<div class="controls"> 
+				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Yes</option>
+			                       <option value=''>No</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">When did you speak to the service providers?</label>
+				            	<div class="controls"> 
+				            	<select name="place_of_birth" id="place_of_birth">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value='' >Before Delivery</option>
+			                       <option value='' >After Delivery</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">Did you ever speak to your family members about FP?</label>
+				            	<div class="controls"> 
+				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Yes</option>
+			                       <option value=''>No</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">Whom did you speak to?</label>
+				            	<div class="controls"> 
+				            	<select name="place_of_birth" id="place_of_birth">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value='' >Husband</option>
+			                       <option value='' >Mother</option>
+			                       <option value='' >Mother-in-law</option>
+			                       <option value='' >Sister-in-law</option>
+			                       <option value='' >Other</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+				            <div class="control-group">
+				            	<label class="control-label">Are you planning on using family planning in the next months?</label>
+				            	<div class="controls"> 
+				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
+			                       <option value='' selected='selected'>---------</option>
+			                       <option value=''>Yes</option>
+			                       <option value=''>No</option>
+			     				</select > 
+				            	</div>
+				            </div>
+				            
+			            </fieldset>
 </script>
 
 <!--////////////////////////////////////////////////// ADOPTION TEMPLATES END ///////////////////////////////////////////////-->
-
-<!--////////////////////////////////////////////////// GROUP TEMPLATES START //////////////////////////////////////////////-->
-<script type="text/template" id="group_table_template">
-       <tr>
-       <th>Id</th>
-	   <th>Name</th>
-	   <th>Village</th>
-       <th></th>
-	   </tr>
-</script>
-<script type="text/template" id="group_list_item_template">
-    <tr>
-    <%if(typeof(online_id)!="undefined"){%>
-        <td><%= online_id %></td>
-    <%}else{%>    
-        <td>Not uploaded</td>
-    <%}%>        
-    <td><%= group_name %></td>
-    <td> <%= village.village_name %></td>
-    <td>
-	<a href="#group/edit/<%= id %>" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a>
-	</td>
-    </tr>
-</script>
-<script type="text/template" id="group_add_edit_template">
-                            <fieldset>
-                                <legend>Add Group</legend>
-								<p class="bold-helptext"> All fields in bold are required</p>
-                                <div class="control-group"> 
-					<label class="control-label"><b>Name</b></label>
-                                	<div class="controls">
-                                 	<input type="text" name="group_name" placeholder="Name">
-                                 	</div>
-                                 </div>
-                                 <div class="control-group"> 
-	                                 <label class="control-label"><b>Village</b></label>
-	                                 <div class="controls"> 
-	                                 <select id = "id_village" name="village" class="chzn-select">
-                                        <option value='' selected='selected'>---------</option> 
-	                                    
-	                                </select>
-	                                </div>
-                                </div>
-                            </fieldset>
-                        
-
-</script>
-
-<script type="text/template" id="person_inline">
-    <tr index = <%=index%> name="row<%=index%>">
-        <td><div class="control-group"><div class="controls">
-            <input type="text" name="person_name<%=index%>" required minlength="2" allowedChar maxlength="100" class="donotvalidate" >
-        </div></div></td>
-        <td><div class="control-group"><div class="controls">
-            <input type="text" name="father_name<%=index%>" required minlength="2" allowedChar maxlength="100" class="donotvalidate">
-        </div></div></td>
-        <td><div class="control-group"><div class="controls">
-            <input class="input-mini donotvalidate" type="text"  name="age<%=index%>" digits min="1" max="100">
-        </div></div></td>
-        <td><div class="control-group"><div class="controls">
-            <select value = 'M'  class="input-small donotvalidate" name="gender<%=index%>" required >
-			<option value='' selected='selected'>---------</option> 
-			<option value='M'>Male</option> 
-			<option value='F'>Female</option>
-            </select>
-        </div></div></td>
-        <td><div class="control-group"><div class="controls">
-            <input  name="phone_no<%=index%>" type="text" maxlength="10" digits class="donotvalidate">
-        </div></div></td>
-    </tr>
-</script>  
-
-<script type="text/template" id="person_inline_header">
-<tr> <th> Person Name</th><th> Father Name</th><th class = "notbold"> Age</th><th> Gender</th><th class="notbold"> Phone No</th></tr>
-</script>
-
-<!--//////////////////////////////////////////////////// GROUP TEMPLATES END ///////////////////////////////////////////////-->
-
-
 
 <!--///////////////////////////////////////////////////// VIDEO TEMPLATES START //////////////////////////////////////////////-->
 <script type="text/template" id="video_table_template">
        <tr>
        <th>Id</th>
 	   <th>Title</th>
-	   <th>Village</th>
-	   <th>Start Date</th>
-	   <th>End Date</th>
        <th></th>
 	   </tr>
 </script>
@@ -941,9 +1055,6 @@
         <td>Not uploaded</td>
     <%}%>        
     <td><%= title %></td>
-	<td> <%= village.village_name %></td>
-    <td> <%= video_production_start_date %></td>
-    <td> <%= video_production_end_date %></td>
     <td>
 	<a href="#video/edit/<%= id %>" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a>
 	</td>
@@ -954,197 +1065,16 @@
                                 <legend>Add Video</legend>
 								<p class="bold-helptext"> All fields in bold are required</p>
                                 <div class="control-group"> 
-					<label class="control-label"><b>Title</b></label>
+									<label class="control-label"><b>Title</b></label>
                                 	<div class="controls">
                                  	<input type="text" name="title" placeholder="Title">
                                  	</div>
                                  </div>
-                                 <div class="control-group"> 
-	                                <label class="control-label"><b>Video Type</b></label>
- 	                                <div class="controls">
- 	                                <select name="video_type">
-                                        <option value="" selected="selected">
-                                            ---------
-                                        </option>
-
-                                        <option value="3">
-                                            Activity Introduction
-                                        </option>
-										<option value="1">
-                                            Demonstration
-                                        </option>
-                                        <option value="4">
-                                            Discussion
-                                        </option>
-                                        <option value="5">
-                                            General Awareness
-                                        </option>
-										<option value="2">
-                                            Success Story/Testimonial
-                                        </option>
-                                    </select>
- 	                                </div>
-                                 </div> 
-                                 <div class="control-group">
-                                     <label class="control-label"><b>Production Start Date</b></label>
-                                     <div class="controls">
-                                         <input class="date-picker input-small" id="video_production_start_date" name="video_production_start_date" type="text" placeholder="Start date">
-                                     </div>
-                                     <span class="help-block">Date should be in the format of yyyy-mm-dd</span>
-                                 </div>
-                                 <div class="control-group">
-                                     <label class="control-label"><b>Production End Date</b></label>
-                                     <div class="controls">
-                                         <input class="date-picker input-small" id="video_production_end_date" name="video_production_end_date" type="text" placeholder="End date">
-                                     </div>
-                                     <span class="help-block">Date should be in the format of yyyy-mm-dd</span>
-                                 </div>
-                                 
-                                 <div class="control-group">
-                                             <label class="control-label"><b>Language</b></label>
-                                             <div class="controls">
-                                                 <select id = "id_language" name="language">
-                                                     <option selected="selected" value="">
-                                                         ---------
-                                                     </option>
-                                                 </select>
-                                             </div>
-                                         </div>
-                                
-                                 <div class="control-group">
-                                 <label>Summary</label>
-                                 <div class="controls">
-                                     <textarea name="summary" class="input-xlarge" rows="4" placeholder="Summary"></textarea>
-                                 </div>
-                             </div>
-                             <div class="control-group">
-                                 <label class="control-label"><b>Village</b></label>
-                                 <div class="controls">
-                                     <select id = "id_village" name="village" class="chzn-select">
-                                     	<option value="">---------- </option>
-                                     </select>
-                                 </div>
-                             </div>
-                             <div class="control-group">
-                                 <label class="control-label"><b>Facilitator</b></label>
-                                 <div class="controls">
-                                     <select id = "id_facilitator" name="facilitator" class="chzn-select">
-                                         <option selected="selected" value="">
-                                             ---------
-                                         </option>
-                                     </select>
-                                 </div>
-                             </div>                     
-                             <div class="control-group">
-                                 <label class="control-label"><b>Camera Operator</b></label>
-                                 <div class="controls">
-                                     <select id = "id_cameraoperator" name="cameraoperator" class="chzn-select">
-                                         <option selected="selected" value="">
-                                             ---------
-                                         </option>
-                                                                         
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label"><b>Persons Shown</b></label>
-                                <div class="controls">
-                                    <select size="20" multiple="multiple" class="input-xlarge chzn-select" id = "id_farmers_shown" name="farmers_shown" >                              </select>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label"><b>Actors</b></label>
-                                    <div class="controls">
-                                        <select class="input-medium" name="actors">
-                                            <option value="" selected="selected">
-                                                ---------
-                                            </option>
-                                            <option value="F">
-                                                Family
-                                            </option>
-                                            <option value="G">
-                                                Group
-                                            </option>
-											<option value="I">
-                                                Individual
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label"><b>Video Suitable For</b></label>
-                                    <div class="controls">
-                                        <select name="video_suitable_for">
-                                            <option value="" selected="selected">
-                                                ---------
-                                            </option>
-                                            <option value="1">
-                                                Dissemination
-                                            </option>
-                                            <option value="3">
-                                                Dissemination Training
-                                            </option>
-                                            <option value="4">
-                                                Nothing
-                                            </option>
-                                            <option value="5">
-                                                Pending For Approval
-                                            </option>
-                                            <option value="2">
-                                                Video Production Training
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label>Approval Date</label>
-                                    <div class="controls">
-                                        <input class="date-picker input-small" id="approval_date" name="approval_date" type="text" placeholder="Approval Date">
-                                    </div>
-                                    <span class="help-block">Date should be in the format of yyyy-mm-dd</span>
-                                </div>
-                                <div class="control-group">
-                                    <label>Youtube Id</label>
-                                    <div class="controls">
-                                        <input name="youtubeid" type="text" placeholder="youtubeid"><br>
-                                    </div>
-                                </div>
 							</fieldset>
                         
 
 </script>
 <!--//////////////////////////////////////////////////// VIDEO TEMPLATES END ///////////////////////////////////////////////-->
-
-<!--/////////////////////////////////////////////////// VILLAGE TEMPLATES START ////////////////////////////////////////////-->
-<script type="text/template" id="village_table_template">
-       <tr>
-       <th>Id</th>
-	   <th>Name</th>
-	   <th>Block Name</th>
-       <th>Start Date</th>
-       <th>State</th>
-       <th></th>
-	   </tr>
-</script>
-
-
-<script type="text/template" id="village_list_item_template">
-<tr>
-    <%if(typeof(online_id)!="undefined"){%>
-        <td><%= online_id %></td>
-    <%}else{%>    
-        <td>Not uploaded</td>
-    <%}%>        
-    <td><%= village_name %></td>
-    <td> <%= block_name %></td>
-    <td> <%= start_date %></td>
-    <td> <%= state_name %></td>
-    <td>
-        <a href="#village/edit/<%= id %>" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a>
-    </td>
-</tr>
-</script>
-<!--//////////////////////////////////////////////////// VILLAGE TEMPLATES END ///////////////////////////////////////////////-->
 
 <!--//////////////////////////////////////////////////// PERSON TEMPLATES END ///////////////////////////////////////////////-->
 <script type="text/template" id="person_list_item_template">
@@ -1157,7 +1087,9 @@
     <td><%= person_name %></td>
     <td> <%= father_name %></td>
     <td> <%= village.village_name %></td>
-    <td> <%= group.group_name %></td>
+    <td> <%= age %></td>
+    <td> <%= gender %></td>
+    <td> <%= type %></td>
     <td>
 	<a href="#person/edit/<%= id %>" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a>
     </td>
@@ -1168,68 +1100,82 @@
        <tr>
        <th>Id</th>
 	   <th>Name</th>
-	   <th>Father Name</th>
-       <th>Village</th>
-       <th>Group</th>
-       <th></th>
+       <th>Spouse/Father Name</th>
+	   <th>Village</th>
+	   <th>Age</th>
+	   <th>Gender</th>
+       <th>Type</th>
 	   </tr>
 </script>
 
 <script type="text/template" id="person_add_edit_template">
-        <fieldset>
-            <legend>Add Person</legend>
-			<p class="bold-helptext"> All fields in bold are required</p>
-            <div class="control-group"> 
-		<label class="control-label"><b>Name</b></label>
-            	<div class="controls">
-             	<input type="text" name="person_name" placeholder="Person Name">
-             	</div>
-             </div>
-             <div class="control-group"> 
-                 <label class="control-label"><b>Father Name</b></label>
-                 <div class="controls"> 
-                 	<input type="text" name="father_name" placeholder="Father Name">
-                 </div>
-             </div>
-             <div class="control-group"> 
-                 <label class="control-label"><b>Village</b></label>
-                 <div class="controls"> 
-                 <select id = "id_village" name="village" class="chzn-select">
-                    
-                </select>
-                </div>
-            </div>
-            <div class="control-group"> 
-                <label class="control-label"><b>Gender</b></label>
-                <div class="controls">
-                <select name="gender">
-					<option value='' selected='selected'>---------</option> 
-					<option value='M'>Male</option> 
-					<option value='F'>Female</option> 
-                </select>
-                </div>
-            </div> 
-            <div class="control-group">
-            	<label class="control-label">Age</label>
-            	<div class="controls"> 
-            	<input class="input-mini" name="age" type="text" placeholder="Age">
-            	</div>
-            </div>
-            <div class="control-group">
-                 <label class="control-label">Phone Number</label>
-                 <div class="controls">
-                 <input name="phone_no" type="text" placeholder="Phone Number">
-                 </div>
-             </div>
-			<div class="control-group"> 
-                 <label class="control-label">Group</label> 
-                 <div class="controls">
-                 <select id = "id_group" name="group" class="chzn-select">
-                    
-                </select>
-                </div>
-            </div>
-        </fieldset>
+       					<fieldset>
+							<legend>Add Person</legend>
+							<p class="bold-helptext">All fields in bold are required</p>
+							<div class="control-group">
+								<label class="control-label coco-required">Name</label>
+								<div class="controls">
+									<input type="text" name="name" placeholder="Name">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label coco-required">Father Name/Spouse Name</label>
+								<div class="controls">
+									<input type="text" name="name" placeholder="Name">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label"><b>Gender</b></label>
+								<div class="controls">
+									<select name="gender">
+										<option value="" selected="selected">---------</option>
+										<option value="M">Male</option>
+										<option value="F">Female</option>
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+				            	<label class="control-label">Age</label>
+				            	<div class="controls"> 
+				            	<input class="input-mini" name="age" type="text" placeholder="Age">
+				            	</div>
+				            </div>
+							<div class="control-group">
+								<label class="control-label"><b>Village</b></label>
+								<div class="controls">
+									<select id="id_village" name="village">
+										<option value="1">Banapadar</option>
+										<option value="2">Girliput</option>
+										<option value="3">AKTAPUT</option>
+										<option value="4">ARLABPUT</option>
+										<option value="5">ASHRAMPUT</option>
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label"><b>Type</b></label>
+								<div class="controls">
+									<select id="id_type" name="type">
+										<option value="">------------</option>
+										<option value="1">Pregnant</option>
+										<option value="2">Lactating</option>
+										<option value="3">Mother in law</option>
+										<option value="4">Sister in law</option>
+										<option value="5">PRADHAN</option>
+										<option value="5">ANM</option>
+										<option value="5">ASHA</option>
+									</select>
+								</div>
+							</div>
+							<div class="control-group"> 
+								<label class="control-label">Date Of Delivery</label>
+			                	<div class="controls">
+			                        <input class="input-small date-picker" id="date" type="text" placeholder="Date" name="date_of_delivery">  
+			                 	</div>
+			                 	<span class="help-block">Date should be in the format of yyyy-mm-dd</span>
+			                </div>
+						</fieldset>
+
 </script>
 <!--//////////////////////////////////////////////////// PERSON TEMPLATES END ///////////////////////////////////////////////-->
    
