@@ -3492,9 +3492,19 @@ function($, configs, pa, indexeddb) {
         _iterate_foreign_fields: function(json, f_entities) {
             for (var entity in f_entities) {
                 for (var element in f_entities[entity]) {
+                    var id_field = this._get_id_field(entity, element, f_entities);
+                    var name_field = this._get_name_field(entity, element, f_entities);
+                    var field_desc = {
+                        entity_name: entity,
+                        id_attribute: id_field,
+                        name_attribute: name_field
+                    };
+                    
                     if (!(json[element])) 
                     {
                         json[element] = {};
+                        json[element][field_desc.id_attribute] = null;
+                        json[element][field_desc.name_attribute] = null;
                         continue;
                     }
                     
@@ -3509,13 +3519,6 @@ function($, configs, pa, indexeddb) {
                         return;
                     }
                         
-                    var id_field = this._get_id_field(entity, element, f_entities);
-                    var name_field = this._get_name_field(entity, element, f_entities);
-                    var field_desc = {
-                        entity_name: entity,
-                        id_attribute: id_field,
-                        name_attribute: name_field
-                    };
 
                     if (json[element] instanceof Array) //multi-select dropdown
                     {
@@ -3540,7 +3543,11 @@ function($, configs, pa, indexeddb) {
         _denormalize_object: function(obj, field_desc) {
             console.log("Denormalize: dnormalizing object", JSON.stringify(obj), JSON.stringify(field_desc));
             var dfd = new $.Deferred();
-            if (!obj[field_desc.id_attribute]) return dfd.resolve();
+            if (!obj[field_desc.id_attribute]){ 
+                obj[field_desc.id_attribute] = null;
+                obj[field_desc.name_attribute] = null;
+                return dfd.resolve();
+            }
             var generic_model_offline = Backbone.Model.extend({
                 database: indexeddb,
                 storeName: field_desc.entity_name,
@@ -3555,7 +3562,8 @@ function($, configs, pa, indexeddb) {
                 },
                 error: function(model, error) {
                     //TODO: OOPS! What should be done now????
-                    alert("Denormalize: unexpected error. check console log " + error);
+                    // alert("Denormalize: unexpected error. check console log " + error);
+                    console.log("Denormalize: unexpected error.fetch failed",error);
                     return dfd.reject(error);
                 }
             });
@@ -3568,7 +3576,6 @@ function($, configs, pa, indexeddb) {
     return denormalize;
 
 });
-
 // Chosen, a Select Box Enhancer for jQuery and Protoype
 // by Patrick Filler for Harvest, http://getharvest.com
 //
