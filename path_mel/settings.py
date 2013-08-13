@@ -160,3 +160,7 @@ LOGGING = {
         },
     }
 }
+
+#following line makes sessionid cookie accessible to in-browser javascript
+SESSION_COOKIE_HTTPONLY = False
+

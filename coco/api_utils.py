@@ -1,3 +1,4 @@
+from django.forms.models import model_to_dict
 
 def many_to_many_to_subfield(bundle, field_name, sub_field_names):
     sub_fields = getattr(bundle.obj, field_name).values(*sub_field_names)

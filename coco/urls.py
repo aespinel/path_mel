@@ -18,6 +18,6 @@ urlpatterns = patterns('',
     (r'^login/', login),
     (r'^logout/', logout),
     (r'^debug/', debug),
-    (r'^get_updated/', send_updated_log),
+    (r'^get_log/', send_updated_log),
     (r'^$', coco_v2),
 )

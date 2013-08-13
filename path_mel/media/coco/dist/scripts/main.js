@@ -5241,11 +5241,18 @@ define('views/form',[
 			
 			var eDate = new Date();
 			enddate = eDate.getFullYear() + "-" + (eDate.getMonth() + 1) + "-" + eDate.getDate();
-			$(".date-picker")
+			$(".date-picker.date-past")
                 .datepicker({
                     format: 'yyyy-mm-dd',
 					startDate: '2009-01-01',
 					endDate: enddate,
+                }).on('changeDate', function(ev){
+                    $(this).datepicker('hide');
+                });
+			$(".date-picker").not(".date-past")
+                .datepicker({
+                    format: 'yyyy-mm-dd',
+					startDate: '2009-01-01',
                 }).on('changeDate', function(ev){
                     $(this).datepicker('hide');
                 });

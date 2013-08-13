@@ -447,13 +447,13 @@
     <td><%= name %></td>
     <td> 
 		<% 
-			var villages=[];
+			var village_list=[];
 			$.each(villages, function(index,val) {
-				villages.push(val.village_name.trim());
+				village_list.push(val.name.trim());
      		});
-			villages.sort();
+			village_list.sort();
 		%>
-	<%= villages %>
+	<%= village_list %>
 	</td>
     <td>
 	<a href="#mediator/edit/<%= id %>" class="edit" title="Edit this entry"><i class="icon-pencil" title="Edit entry"></i></a>
@@ -490,7 +490,9 @@
        <th>Id</th>
 	   <th>Date</th>
 	   <th>Mediator</th>
+       <th>Village</th>
        <th>Video</th>
+       <th></th>
 	   </tr>
 </script>
 <script type="text/template" id="dissemination_list_item_template">
@@ -500,28 +502,10 @@
     <%}else{%>    
         <td>Not uploaded</td>
     <%}%>        
-    <td><%= date %></td>
-    <td> <%= animator.name %></td>
-    <td> <%= village.village_name %></td>
-	<td>
-	<% 
-		var groups="";
-		$.each(farmer_groups_targeted, function(index,val) {
-			groups = groups + val.group_name +"; ";
-     	});
-	%>
-	<%= groups %>
-	</td>    
-	<td> 
-	<% 
-		var videos="";
-		$.each(videoes_screened, function(index,val) {
-			videos = videos + val.title + "; ";
-     	});
-	%>
-	<%= videos %>
-	</td>
-    
+    <td> <%= date %></td>
+    <td> <%= mediator.name %> </td>
+    <td> <%= village.name %> </td>  
+	<td> <%= video.title %> </td>
     <td>
 	<a href="#dissemination/edit/<%= id %>" class="edit" title="Edit this entry"><i class="icon-pencil"></i></a>
     </td>
@@ -534,7 +518,7 @@
 			                <div class="control-group"> 
 						<label class="control-label required">Date</label>
 			                	<div class="controls">
-			                 	<input class="date-picker input-small" id="date" type="text" placeholder="Date" name="date">  
+			                 	<input class="date-picker date-past input-small" id="date" type="text" placeholder="Date" name="date">  
 			                 	</div>
 			                 	<span class="help-block">Enter the date in the form of YYYY-MM-DD</span>
 			                 </div>
@@ -553,17 +537,17 @@
 			                 	<span class="help-block">Enter the time in the form of HH:MM. Use 24 hour format</span>
 			                 </div>
 			                 <div class="control-group">
-						<label class="control-label required">Village</label>
+						         <label class="control-label required">Village</label>
 			                	<div class="controls"> 
-			                	<select name="village" id="id_village" class="chzn-select" placeholder="Enter animator to enable">
-			                    <option value='' selected='selected'>---------</option> 
-			                    </select>
+			                	    <select name="village" id="id_village" class="chzn-select">
+			                            <option value='' selected='selected'>---------</option> 
+			                        </select>
 			                	</div>
 			                </div>
 			                <div class="control-group">
 								<label class="control-label required">Mediator</label>
 			                 	<div class="controls"> 
-			                 	<select name="animator" id="id_animator" class="chzn-select">
+			                 	<select name="mediator" id="id_mediator" class="chzn-select">
 			                       <option value='' selected='selected'>---------</option> 
 			     				</select > 
 			               	    </div>
@@ -571,7 +555,7 @@
 			               <div class="control-group"> 
 							<label class="control-label required">Video</label>
 			                	<div class="controls"> 
-			                	<select multiple="multiple" name="video" id = "id_video" class="chzn-select">
+			                	<select name="video" id = "id_video" class="chzn-select">
 			                        </select> 
 			                    </div>
 			                </div>
@@ -650,7 +634,7 @@
 			                            </th>
 			                        </tr>
 			                    </thead>
-			                    <tbody id="pmas">
+			                    <tbody id="attendance_records">
 			                    </tbody>
 			                </table>
 			            </fieldset>
@@ -678,19 +662,19 @@
                 <div class="controls">
 				<% 
 					var person_label="";
-					person_label =person_name+"("+father_name+")";
+					person_label = name+"("+other_name+")";
 				%>
-                    <input type="text" class="input-xlarge" disabled id="person_row7" name="person_name" value = "<%=person_label%>">
+                    <input type="text" class="input-xlarge" disabled id="person_row7" name="name" value = "<%=person_label%>">
                 </div>
             </div>
         </td>
         <td>
             <div class="control-group">
                 <div class="controls">
-                <%if(typeof(expressed_question)!="undefined"){%>
-                    <input type="text"  name="expressed_question" value ="<%=expressed_question%>">
+                <%if(typeof(question_asked)!="undefined"){%>
+                    <input type="text"  name="question_asked" value ="<%=question_asked%>">
                 <%} else{%>
-                    <input type="text"  name="expressed_question" >
+                    <input type="text"  name="question_asked" >
                 <%}%>    
                 </div>
             </div>
@@ -725,9 +709,9 @@
     <%}else{%>    
         <td>Not uploaded</td>
     <%}%>        
-    <td> <%= person.person_name %></td>
-    <td> <%= village.village_name %></td>
-	<td><%= date_of_delivery %></td>
+    <td> <%= person.name %></td>
+    <td> <%= village.name %></td>
+	<td><%= delivery_date %></td>
     <td> <%= mediator.name %></td>
 	<td> <%= date_of_visit %></td>
     <td>
@@ -761,7 +745,7 @@
 			                <div class="control-group"> 
 								<label class="control-label required">Date Of Delivery</label>
 			                	<div class="controls">
-			                 	<input class="date-picker input-small" id="date_of_delivery" type="text" placeholder="Date Of Delivery" name="date">  
+			                 	<input class="date-picker date-past input-small" id="delivery_date" type="text" placeholder="Date Of Delivery" name="date">  
 			                 	</div>
 			                 	<span class="help-block">Enter the date in the form of YYYY-MM-DD</span>
 			                 </div>
@@ -769,7 +753,7 @@
 			                 <div class="control-group"> 
 								<label class="control-label required">Date Of Visit</label>
 			                	<div class="controls">
-			                 	<input class="date-picker input-small" id="date_of_visit" type="text" placeholder="Date Of Visit" name="date">  
+			                 	<input class="date-picker date-past input-small" id="date_of_visit" type="text" placeholder="Date Of Visit" name="date">  
 			                 	</div>
 			                 	<span class="help-block">Enter the date in the form of YYYY-MM-DD</span>
 			                 </div>
@@ -777,7 +761,7 @@
 			                <div class="control-group">
 								<label class="control-label required">Mediator</label>
 			                 	<div class="controls"> 
-			                 	<select name="animator" id="id_animator" class="chzn-select">
+			                 	<select name="mediator" id="id_mediator" class="chzn-select">
 			                       <option value='' selected='selected'>---------</option> 
 			     				</select > 
 			               	    </div>
@@ -1122,9 +1106,9 @@
     <%}else{%>    
         <td>Not uploaded</td>
     <%}%>        
-    <td><%= person_name %></td>
-    <td> <%= father_name %></td>
-    <td> <%= village.village_name %></td>
+    <td> <%= name %></td>
+    <td> <%= other_name %></td>
+    <td> <%= village.name %></td>
     <td> <%= age %></td>
     <td> <%= gender %></td>
     <td> <%= type %></td>
@@ -1143,6 +1127,7 @@
 	   <th>Age</th>
 	   <th>Gender</th>
        <th>Type</th>
+       <th></th>
 	   </tr>
 </script>
 
@@ -1159,7 +1144,7 @@
 							<div class="control-group">
 								<label class="control-label coco-required">Father Name/Spouse Name</label>
 								<div class="controls">
-									<input type="text" name="name" placeholder="Name">
+									<input type="text" name="other_name" placeholder="Name">
 								</div>
 							</div>
 							<div class="control-group">
@@ -1208,7 +1193,7 @@
 							<div class="control-group"> 
 								<label class="control-label">Date Of Delivery</label>
 			                	<div class="controls">
-			                        <input class="input-small date-picker" id="date" type="text" placeholder="Date" name="date_of_delivery">  
+			                        <input class="input-small date-picker" id="date" type="text" placeholder="Date" name="delivery_date">
 			                 	</div>
 			                 	<span class="help-block">Date should be in the format of yyyy-mm-dd</span>
 			                </div>

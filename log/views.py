@@ -1,3 +1,5 @@
+from django.core import serializers
+from django.http import HttpResponse
 from models import ServerLog
 
 def send_updated_log(request):

@@ -1,12 +1,25 @@
+from functools import partial
+from tastypie import fields
+from tastypie.authentication import SessionAuthentication
+from tastypie.authorization import DjangoAuthorization
 from tastypie.resources import ModelResource, NOT_AVAILABLE
 from tastypie.validation import Validation
 
 from api_utils import dict_to_foreign_uri, dict_to_foreign_uri_m2m, foreign_key_to_id, many_to_many_to_subfield
-from models import Dissemination, Mediator, Person, Video, Village
+from models import Attendance, Dissemination, Mediator, Person, Video, Village
+
+class VillageResource(ModelResource):    
+    class Meta:
+        max_limit = None
+        queryset = Village.objects.all()
+        resource_name = 'village'
+        authentication = SessionAuthentication()
+        authorization = DjangoAuthorization()
+        always_return_data = True
 
 class MediatorResource(ModelResource):
     mediator_label = fields.CharField()
-    villages = fields.ListField()
+    villages = fields.ToManyField(VillageResource, 'villages')
     class Meta:
         max_limit = None
         authentication = SessionAuthentication()
@@ -18,20 +31,12 @@ class MediatorResource(ModelResource):
     hydrate_villages = partial(dict_to_foreign_uri_m2m, field_name='villages', resource_name = 'village')
     
     def dehydrate_villages(self, bundle):
-        return [{'id': vil.id, 'village_name': vil.village_name} for vil in set(bundle.obj.villages.all()) ]
+        return [{'id': vil.id, 'name': vil.name} for vil in set(bundle.obj.villages.all()) ]
 
     def dehydrate_mediator_label(self,bundle):
         #for sending out label incase of dropdowns
-        return ','.join([ vil.village_name for vil in set(bundle.obj.villages.all())])
+        return ','.join([ vil.name for vil in set(bundle.obj.villages.all())])
 
-class VillageResource(ModelResource):    
-    class Meta:
-        max_limit = None
-        queryset = Village.objects.all()
-        resource_name = 'village'
-        authentication = SessionAuthentication()
-        authorization = DjangoAuthorization()
-        always_return_data = True
 
 class VideoResource(ModelResource):
     class Meta:
@@ -52,7 +57,7 @@ class PersonResource(ModelResource):
         authorization = DjangoAuthorization()
         always_return_data = True
     
-    dehydrate_village = partial(foreign_key_to_id, field_name='village',sub_field_names=['id', 'village_name'])
+    dehydrate_village = partial(foreign_key_to_id, field_name='village',sub_field_names=['id', 'name'])
     hydrate_village = partial(dict_to_foreign_uri, field_name = 'village')
 
 class DisseminationResource(ModelResource):
@@ -60,7 +65,7 @@ class DisseminationResource(ModelResource):
     mediator = fields.ForeignKey(MediatorResource, 'mediator')
     video = fields.ForeignKey(VideoResource, 'video')
     attendance_records = fields.ListField()
-    dehydrate_village = partial(foreign_key_to_id, field_name='village',sub_field_names=['id','village_name'])
+    dehydrate_village = partial(foreign_key_to_id, field_name='village',sub_field_names=['id','name'])
     dehydrate_mediator = partial(foreign_key_to_id, field_name='mediator',sub_field_names=['id','name'])
     hydrate_village = partial(dict_to_foreign_uri, field_name='village')
     hydrate_mediator = partial(dict_to_foreign_uri, field_name='mediator', resource_name='mediator')
@@ -75,7 +80,7 @@ class DisseminationResource(ModelResource):
     
     def obj_create(self, bundle, **kwargs):
         bundle = super(DisseminationResource, self).obj_create(bundle, **kwargs)
-        diss_id  = getattr(bundle.obj,'id')
+        dissemination_id  = getattr(bundle.obj,'id')
         att_list = bundle.data.get('attendance_records')
         for att in att_list:
             att = Attendance(dissemination_id=dissemination_id, person_id=att['person_id'], interested = att['interested'], expressed_question = att['expressed_question'])
@@ -85,8 +90,8 @@ class DisseminationResource(ModelResource):
     def obj_update(self, bundle, **kwargs):
         #Edit case many to many handling. First clear out the previous related objects and create new objects
         bundle = super(ScreeningResource, self).obj_update(bundle, **kwargs)
-        diss_id = bundle.data.get('id')
-        del_objs = PersonMeetingAttendance.objects.filter(dissemination_id=dissemination_id).delete()
+        dissemination_id = bundle.data.get('id')
+        del_objs = Attendance.objects.filter(dissemination_id=dissemination_id).delete()
         att_list = bundle.data.get('attendance_records')
         for att in att_list:
             att = Attendance(dissemination_id=dissemination_id, person_id=att['person_id'], 
@@ -100,7 +105,7 @@ class DisseminationResource(ModelResource):
     
     def dehydrate_attendance_records(self, bundle):
         return [{'person_id':att.person.id, 
-                 'person_name': att.person.person_name, 
+                 'name': att.person.name, 
                  'interested': att.interested, 
                  'expressed_question': att.expressed_question, 
                  }  for att in bundle.obj.attendance_set.all()]
