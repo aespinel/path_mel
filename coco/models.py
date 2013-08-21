@@ -73,6 +73,30 @@ class Attendance(models.Model):
     question_asked = models.CharField(max_length=200, blank=True)
     liked = models.BooleanField(default=False)
 
-class Interview(models.Model):
+class Adoption(models.Model):
     person = models.ForeignKey(Person)
-    
+    mediator = models.ForeignKey(Mediator)
+    delivery_date = models.DateField()
+    date_of_visit = models.DateField()
+    checked_by = models.CharField(null=True, blank=True, max_length=100)
+    place_of_birth = models.CharField(null=True, blank=True, max_length=100)
+    preparation_of_last_delivery = models.CharField(null=True, blank=True, max_length=100)
+    cord_care = models.CharField(null=True, blank=True, max_length=100)
+    cord_cut = models.CharField(null=True, blank=True, max_length=100)
+    baby_bathe = models.CharField(null=True, blank=True, max_length=100)
+    wiped = models.CharField(null=True, blank=True, max_length=100)
+    baby_wrap = models.CharField(null=True, blank=True, max_length=100)
+    baby_hold = models.CharField(null=True, blank=True, max_length=100)
+    baby_colostrums = models.CharField(null=True, blank=True, max_length=100)
+    breastfeed = models.CharField(null=True, blank=True, max_length=100)
+    feed = models.CharField(null=True, blank=True, max_length=100)
+    other_food = models.CharField(null=True, blank=True, max_length=100)
+    liquids = models.CharField(null=True, blank=True, max_length=100)
+    family_planning = models.CharField(null=True, blank=True, max_length=100)
+    fp_method = models.CharField(null=True, blank=True, max_length=100)
+    fp_awareness = models.CharField(null=True, blank=True, max_length=100)
+    fp_service_providers = models.CharField(null=True, blank=True, max_length=100)
+    fp_family_discussion = models.CharField(null=True, blank=True, max_length=100)
+    fp_family_member = models.CharField(null=True, blank=True, max_length=100)
+    fp_use = models.CharField(null=True, blank=True, max_length=100)
+

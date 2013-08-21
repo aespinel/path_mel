@@ -343,7 +343,7 @@ function() {
             errorClass: "help-inline"
         }
     };
-    /*
+    
     var adoption_configs = {
         'page_header': 'Adoption',
         'list_table_header_template': 'adoption_table_template',
@@ -352,8 +352,8 @@ function() {
         'edit_template_name': 'adoption_edit_template',
         'rest_api_url': '/coco/api/v1/adoption/',
         'entity_name': 'adoption',
-        'inc_table_name': 'personadoptpractice',
-        'unique_together_fields': ['person.id', 'video.id', 'date_of_adoption'],
+        'inc_table_name': 'adoption',
+        'unique_together_fields': ['person.id', 'date'],
         form_field_validation: {
             ignore: [],
             highlight: function(element, errorClass, validClass) {
@@ -374,104 +374,33 @@ function() {
             errorClass: "help-block",
             display: "block"
         },
-        add: {
-            'foreign_entities': {
+        
+        'foreign_entities': {
+            'village': {
                 'village': {
-                    'village': {
-                        'placeholder': 'id_village',
-                        'name_field': 'village_name'
-                    },
+                    'placeholder': 'id_village',
+                    'name_field': 'name'
                 },
-                'group': {
-                    'group': {
-                        'placeholder': 'id_group',
-                        'name_field': 'group_name',
-                        'dependency': [{
-                            'source_form_element': 'village',
-                            'dep_attr': 'village'
-                        }]
-                    }
-                },
-                'person': {
-                    float_person: {
-                        'placeholder': 'id_person',
-                        'name_field': 'person_name',
-                        'dependency': [{
-                            'source_form_element': 'village',
-                            'dep_attr': 'village'
-                        }],
-                        'filter': {
-                            attr: 'group',
-                            value: null
-                        }
-                    },
-                    farmers_attendance: {
-                        dependency: [{
-                            'source_form_element': 'group',
-                            'dep_attr': 'group'
-                        }, {
-                            'source_form_element': 'float_person',
-                            'dep_attr': 'id'
-                        }],
-                        id_field: "person_id", // for convert_namespace conversion      
-                        'expanded': { // won't be denormalised, wud be converted offline to online, render wud use a template declared and nt options template, any field to be denormalised or converted offline to online can be declared - this shd be clubbed and put as foreign entity of expanded.  
-                            template: 'adoption_inline',
-                            placeholder: 'bulk'
-                        }
-                    }
-                }
             },
-            'bulk': {
-                foreign_fields: { //foreign fields in the individual objects
-                    "video": {
-                        video: {
-                            'name_field': 'title'
-                        }
-                    },
-                    "person": {
-                        person: {
-                            'name_field': 'person_name'
-                        }
-                    },
-                    village: {
-                        village:{
-                            'name_field': 'village_name'
-                        }
-                    },
-                    group: {
-                        group:{
-                            'name_field': 'group_name'
-                        }
-                    }
+            'person': {
+                    'placeholder': 'id_person',
+                    'name_field': 'name',
+                    'dependency': [{
+                        'source_form_element': 'village',
+                        'dep_attr': 'village'
+                    }],
                 },
-                borrow_fields: ['village', 'group']
-            }
-        },
-        edit: {
-            'foreign_entities': {
-                'person': {
-                    'person': {
-                        'placeholder': 'id_person',
-                        'name_field': 'person_name'
-                    },
-                },
-                'video': {
-                    'video': {
-                        'placeholder': 'id_video',
-                        // 'sub_attr': 'videos_seen',
-                        'name_field': 'title',
-                        'dependency': [{
-                            'source_form_element': 'person',
-                            'dep_attr': 'id',
-                            'src_attr': 'videos_seen',
-                        }]
-                    }
-                }
+            'mediator': {
+                'placeholder': 'id_mediaAdoptionResourcetor',
+                'name_field': 'name',
+                'dependency': [{
+                    'source_form_element': 'village',
+                    'dep_attr': 'villages'
+                }],
             }
         }
-
     };
-    */
+    
     
     var person_configs = {
         'page_header': 'Person',
@@ -575,7 +504,7 @@ function() {
         video: video_configs,
         person: person_configs,
         dissemination: dissemination_configs,
-        /*adoption: adoption_configs,*/
+        adoption: adoption_configs,
         misc: misc
     }
 

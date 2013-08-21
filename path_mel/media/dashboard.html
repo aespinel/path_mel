@@ -26,7 +26,7 @@
 
 <script type="text/template" id="header">
 <div class="page-header" style="margin-bottom:0px;">
-    <h1 ><a href="#">PATH-MEL</a></h1>
+    <h1 ><a href="#">PATH-MEL Demo</a></h1>
     <ul class="breadcrumb">
     <%=breadcrumb%>
     </ul>
@@ -194,7 +194,7 @@
 <script type="text/template" id="status">
     <div id="modal"></div>
 	<div class="page-header">
-	    <h1 style = "color:#0088cc;"> Welcome to PATH-MEL!
+	    <h1 style = "color:#0088cc;"> Welcome to PATH-MEL Demo!
             <br>
                 <small>COCO helps you to seamlessly enter data in conditions of intermittent connectivity.</small>
             </br>
@@ -403,7 +403,7 @@
         <td><%= online_id %></td>
     <%}else{%>    
         <td>Not uploaded</td>
-    <%}%>        
+    <%}%>   
     <td><%= name %></td>
     <td>
 	<a href="#village/edit/<%= id %>" class="edit" title="Edit this entry"><i class="icon-pencil" title="Edit entry"></i></a>
@@ -745,7 +745,7 @@
 			                <div class="control-group"> 
 								<label class="control-label required">Date Of Delivery</label>
 			                	<div class="controls">
-			                 	<input class="date-picker date-past input-small" id="delivery_date" type="text" placeholder="Date Of Delivery" name="date">  
+			                 	<input class="date-picker date-past input-small" id="delivery_date" type="text" placeholder="Date Of Delivery" name="delivery_date">  
 			                 	</div>
 			                 	<span class="help-block">Enter the date in the form of YYYY-MM-DD</span>
 			                 </div>
@@ -753,7 +753,7 @@
 			                 <div class="control-group"> 
 								<label class="control-label required">Date Of Visit</label>
 			                	<div class="controls">
-			                 	<input class="date-picker date-past input-small" id="date_of_visit" type="text" placeholder="Date Of Visit" name="date">  
+			                 	<input class="date-picker date-past input-small" id="date_of_visit" type="text" placeholder="Date Of Visit" name="date_of_visit">  
 			                 	</div>
 			                 	<span class="help-block">Enter the date in the form of YYYY-MM-DD</span>
 			                 </div>
@@ -782,10 +782,10 @@
 				            	<label class="control-label">Where did you give birth to last child</label>
 				            	<div class="controls"> 
 				            	<select name="place_of_birth" id="place_of_birth">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value='' >Home</option>
-			                       <option value='' >Government Hospital</option>
-			                       <option value='' >Private Hospital</option> 
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1' >Home</option>
+			                       <option value='2' >Government Hospital</option>
+			                       <option value='3' >Private Hospital</option> 
 			     				</select > 
 				            	</div>
 				            </div>
@@ -794,12 +794,12 @@
 				            	<label class="control-label">During your last delivery what preparation did you take?</label>
 				            	<div class="controls"> 
 				            	<select name="preparation_of_last_delivery" multiple="multiple" id="preparation_of_last_delivery">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value='' >Make Preparations for emergency transport</option>
-			                       <option value='' >Prepare blade, thread for cord cutting</option>
-			                       <option value='' >Organize clothes for baby</option>
-			                       <option value='' >Clean dry cotton cloth for drying and wrapping the baby</option>
-			                       <option value='' >Save money for an emergency</option> 
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1' >Make Preparations for emergency transport</option>
+			                       <option value='2' >Prepare blade, thread for cord cutting</option>
+			                       <option value='3' >Organize clothes for baby</option>
+			                       <option value='4' >Clean dry cotton cloth for drying and wrapping the baby</option>
+			                       <option value='5' >Save money for an emergency</option> 
 			     				</select > 
 				            	</div>
 				            </div>
@@ -809,12 +809,12 @@
 			                 <div class="control-group">
 				            	<label class="control-label">How did you handle the cord cutting after birth?</label>
 				            	<div class="controls"> 
-				            	<select name="place_of_birth" id="place_of_birth">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value='' >Used a clean blade</option>
-			                       <option value='' >used a clean cord to tie</option>
-			                       <option value='' >Both</option>
-			                       <option value='' >None of the above</option> 
+				            	<select name="cord_cut" id="cord_cut">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1' >Used a clean blade</option>
+			                       <option value='2' >used a clean cord to tie</option>
+			                       <option value='3' >Both</option>
+			                       <option value='4' >None of the above</option> 
 			     				</select > 
 				            	</div>
 				            </div>
@@ -822,14 +822,14 @@
 				            <div class="control-group">
 				            	<label class="control-label">What did you put on the cord after cutting?</label>
 				            	<div class="controls"> 
-				            	<select multiple="multiple" name="preparation_of_last_delivery" id="preparation_of_last_delivery">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value=''>Nothing</option>
-			                       <option value=''>Oil/Ghee</option>
-			                       <option value=''>Turmeric</option>
-			                       <option value=''>Ash/mud</option>
-			                       <option value=''>Ointment</option>
-			                       <option value=''>Others</option> 
+				            	<select multiple="multiple" name="cord_care" id="cord_care">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1'>Nothing</option>
+			                       <option value='2'>Oil/Ghee</option>
+			                       <option value='3'>Turmeric</option>
+			                       <option value='4'>Ash/mud</option>
+			                       <option value='5'>Ointment</option>
+			                       <option value='6'>Others</option> 
 			     				</select > 
 				            	</div>
 				            </div>
@@ -840,13 +840,13 @@
 			                 <div class="control-group">
 				            	<label class="control-label">When did you bathe the baby</label>
 				            	<div class="controls"> 
-				            	<select name="place_of_birth" id="place_of_birth">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value='' >Immediately after birth</option>
-			                       <option value='' >After hours</option>
-			                       <option value='' >In 1 day</option>
-			                       <option value='' >Between 3-7 days after birth</option>
-			                       <option value='' >Don't know</option> 
+				            	<select name="baby_bathe" id="baby_bathe">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1' >Immediately after birth</option>
+			                       <option value='2' >After hours</option>
+			                       <option value='3' >In 1 day</option>
+			                       <option value='4' >Between 3-7 days after birth</option>
+			                       <option value='5' >Do not know</option> 
 			     				</select > 
 				            	</div>
 				            </div>
@@ -854,10 +854,10 @@
 				            <div class="control-group">
 				            	<label class="control-label">Was the baby wiped with a clean cloth?</label>
 				            	<div class="controls"> 
-				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value=''>Yes</option>
-			                       <option value=''>No</option>
+				            	<select name="wiped" id="wiped">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1'>Yes</option>
+			                       <option value='2'>No</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -865,10 +865,10 @@
 				            <div class="control-group">
 				            	<label class="control-label">Was the baby wrapped in a dry cloth to keep warm?</label>
 				            	<div class="controls"> 
-				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value=''>Yes</option>
-			                       <option value=''>No</option>
+				            	<select name="baby_wrap" id="baby_wrap">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1'>Yes</option>
+			                       <option value='2'>No</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -876,10 +876,10 @@
 				            <div class="control-group">
 				            	<label class="control-label">Did you or your family member hold the baby against your skin birth</label>
 				            	<div class="controls"> 
-				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value=''>Yes</option>
-			                       <option value=''>No</option>
+				            	<select name="baby_hold" id="baby_hold">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1'>Yes</option>
+			                       <option value='2'>No</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -891,10 +891,10 @@
 				            <div class="control-group">
 				            	<label class="control-label">Did you give the baby colostrums?</label>
 				            	<div class="controls"> 
-				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value=''>Yes</option>
-			                       <option value=''>No</option>
+				            	<select name="baby_colostrums" id="baby_colostrums">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1'>Yes</option>
+			                       <option value='2'>No</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -902,13 +902,13 @@
 				            <div class="control-group">
 				            	<label class="control-label">When did you start breastfeeding?</label>
 				            	<div class="controls"> 
-				            	<select name="place_of_birth" id="place_of_birth">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value='' >Immediately after birth</option>
-			                       <option value='' >In 1 hour</option>
-			                       <option value='' >In 1 day</option>
-			                       <option value='' >3 days</option>
-			                       <option value='' >After 3 days</option> 
+				            	<select name="breastfeed" id="breastfeed">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1' >Immediately after birth</option>
+			                       <option value='2' >In 1 hour</option>
+			                       <option value='3' >In 1 day</option>
+			                       <option value='4' >3 days</option>
+			                       <option value='5' >After 3 days</option> 
 			     				</select > 
 				            	</div>
 				            </div>
@@ -921,10 +921,10 @@
 				            <div class="control-group">
 				            	<label class="control-label">In the first three days after delivery did you give anything to drink other than breast milk?</label>
 				            	<div class="controls"> 
-				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value=''>Yes</option>
-			                       <option value=''>No</option>
+				            	<select name="feed" id="feed">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1'>Yes</option>
+			                       <option value='2'>No</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -932,7 +932,7 @@
 				            <div class="control-group">
 				            	<label class="control-label">What was given to your child to drink other than breast milk?</label>
 				            	<div class="controls"> 
-				            	<select multiple="multiple" name="place_of_birth" id="place_of_birth">
+				            	<select multiple="multiple" name="other_food" id="other_food">
 			                       <option value='' selected='selected'>---------</option>
 			                       <option value='' >Top feeding/milk</option>
 			                       <option value='' >Water</option>
@@ -949,14 +949,14 @@
 				            <div class="control-group">
 				            	<label class="control-label">When do you plan on giving your child water or top milk?</label>
 				            	<div class="controls"> 
-				            	<select name="place_of_birth" id="place_of_birth">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value='' >Right away</option>
-			                       <option value='' >Not before months</option>
-			                       <option value='' >Within months</option>
-			                       <option value='' >Before months</option>
-			                       <option value='' >Not decided</option>
-			                       <option value='' >Other</option>
+				            	<select name="liquids" id="liquids">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1' >Right away</option>
+			                       <option value='2' >Not before months</option>
+			                       <option value='3' >Within months</option>
+			                       <option value='4' >Before months</option>
+			                       <option value='5' >Not decided</option>
+			                       <option value='6' >Other</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -969,10 +969,10 @@
 				            <div class="control-group">
 				            	<label class="control-label">Are you using a FP method?</label>
 				            	<div class="controls"> 
-				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value=''>Yes</option>
-			                       <option value=''>No</option>
+				            	<select name="family_planning" id="family_planning">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1'>Yes</option>
+			                       <option value='2'>No</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -980,19 +980,19 @@
 				            <div class="control-group">
 				            	<label class="control-label">What FP methods have you used?</label>
 				            	<div class="controls"> 
-				            	<select multiple="multiple" name="place_of_birth" id="place_of_birth">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value='' >LAM</option>
-			                       <option value='' >Pill</option>
-			                       <option value='' >Injection</option>
-			                       <option value='' >IUD/Loop</option>
-			                       <option value='' >Rhythm</option>
-			                       <option value='' >Withdrawal</option>
-			                       <option value='' >Foam/Jelly</option>
-			                       <option value='' >Condoms</option>
-			                       <option value='' >Male sterilization</option>
-			                       <option value='' >Female sterilization</option>
-			                       <option value='' >Others</option>
+				            	<select multiple="multiple" name="fp_method" id="fp_method">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1' >LAM</option>
+			                       <option value='2' >Pill</option>
+			                       <option value='3' >Injection</option>
+			                       <option value='4' >IUD/Loop</option>
+			                       <option value='5' >Rhythm</option>
+			                       <option value='6' >Withdrawal</option>
+			                       <option value='7' >Foam/Jelly</option>
+			                       <option value='8' >Condoms</option>
+			                       <option value='9' >Male sterilization</option>
+			                       <option value='10' >Female sterilization</option>
+			                       <option value='11' >Others</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -1001,10 +1001,10 @@
 				            	<label class="control-label">Were you ever told by a health or family planning worker about any
 				            	methods of family planning that you can use to aviod pregnancy?</label>
 				            	<div class="controls"> 
-				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value=''>Yes</option>
-			                       <option value=''>No</option>
+				            	<select name="fp_awareness" id="fp_awareness">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1'>Yes</option>
+			                       <option value='2'>No</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -1012,10 +1012,10 @@
 				            <div class="control-group">
 				            	<label class="control-label">When did you speak to the service providers?</label>
 				            	<div class="controls"> 
-				            	<select name="place_of_birth" id="place_of_birth">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value='' >Before Delivery</option>
-			                       <option value='' >After Delivery</option>
+				            	<select name="fp_service_providers" id="fp_service_providers">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1' >Before Delivery</option>
+			                       <option value='2' >After Delivery</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -1023,10 +1023,10 @@
 				            <div class="control-group">
 				            	<label class="control-label">Did you ever speak to your family members about FP?</label>
 				            	<div class="controls"> 
-				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value=''>Yes</option>
-			                       <option value=''>No</option>
+				            	<select name="fp_family_discussion" id="fp_family_discussion">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1'>Yes</option>
+			                       <option value='2'>No</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -1034,13 +1034,13 @@
 				            <div class="control-group">
 				            	<label class="control-label">Whom did you speak to?</label>
 				            	<div class="controls"> 
-				            	<select name="place_of_birth" id="place_of_birth">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value='' >Husband</option>
-			                       <option value='' >Mother</option>
-			                       <option value='' >Mother-in-law</option>
-			                       <option value='' >Sister-in-law</option>
-			                       <option value='' >Other</option>
+				            	<select name="fp_family_member" id="fp_family_member">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1' >Husband</option>
+			                       <option value='2' >Mother</option>
+			                       <option value='3' >Mother-in-law</option>
+			                       <option value='4' >Sister-in-law</option>
+			                       <option value='5' >Other</option>
 			     				</select > 
 				            	</div>
 				            </div>
@@ -1048,10 +1048,10 @@
 				            <div class="control-group">
 				            	<label class="control-label">Are you planning on using family planning in the next months?</label>
 				            	<div class="controls"> 
-				            	<select name="preparation_of_last_delivery" id="preparation_of_last_delivery">
-			                       <option value='' selected='selected'>---------</option>
-			                       <option value=''>Yes</option>
-			                       <option value=''>No</option>
+				            	<select name="fp_use" id="fp_use">
+			                       <option value='0' selected='selected'>---------</option>
+			                       <option value='1'>Yes</option>
+			                       <option value='2'>No</option>
 			     				</select > 
 				            	</div>
 				            </div>

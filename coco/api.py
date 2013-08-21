@@ -6,7 +6,7 @@ from tastypie.resources import ModelResource, NOT_AVAILABLE
 from tastypie.validation import Validation
 
 from api_utils import dict_to_foreign_uri, dict_to_foreign_uri_m2m, foreign_key_to_id, many_to_many_to_subfield
-from models import Attendance, Dissemination, Mediator, Person, Video, Village
+from models import Adoption, Attendance, Dissemination, Mediator, Person, Video, Village
 
 class VillageResource(ModelResource):    
     class Meta:
@@ -59,6 +59,17 @@ class PersonResource(ModelResource):
     
     dehydrate_village = partial(foreign_key_to_id, field_name='village',sub_field_names=['id', 'name'])
     hydrate_village = partial(dict_to_foreign_uri, field_name = 'village')
+
+class AdoptionResource(ModelResource):
+    person = fields.ForeignKey(PersonResource, 'person')
+    mediator = fields.ForeignKey(MediatorResource, 'mediator')
+    class Meta:
+        max_limit = None
+        queryset = Adoption.objects.all()
+        resource_name = 'adoption'
+        authentication = SessionAuthentication()
+        authorization = DjangoAuthorization()
+        always_return_data = True
 
 class DisseminationResource(ModelResource):
     village = fields.ForeignKey(VillageResource, 'village')
