@@ -382,7 +382,8 @@ function() {
                     'name_field': 'name'
                 },
             },
-            'person': {
+            person:{
+                'person': {
                     'placeholder': 'id_person',
                     'name_field': 'name',
                     'dependency': [{
@@ -390,13 +391,16 @@ function() {
                         'dep_attr': 'village'
                     }],
                 },
-            'mediator': {
-                'placeholder': 'id_mediaAdoptionResourcetor',
-                'name_field': 'name',
-                'dependency': [{
-                    'source_form_element': 'village',
-                    'dep_attr': 'villages'
-                }],
+            },
+            mediator:{
+            	'mediator': {
+                    'placeholder': 'id_mediator',
+                    'name_field': 'name',
+                    'dependency': [{
+                        'source_form_element': 'village',
+                        'dep_attr': 'villages'
+                    }],
+                },
             }
         }
     };

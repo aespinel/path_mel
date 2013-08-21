@@ -63,6 +63,10 @@ class PersonResource(ModelResource):
 class AdoptionResource(ModelResource):
     person = fields.ForeignKey(PersonResource, 'person')
     mediator = fields.ForeignKey(MediatorResource, 'mediator')
+    dehydrate_person = partial(foreign_key_to_id, field_name='person',sub_field_names=['id','name'])
+    dehydrate_mediator = partial(foreign_key_to_id, field_name='mediator',sub_field_names=['id','name'])
+    hydrate_person = partial(dict_to_foreign_uri, field_name='person')
+    hydrate_mediator = partial(dict_to_foreign_uri, field_name='mediator', resource_name='mediator')
     class Meta:
         max_limit = None
         queryset = Adoption.objects.all()
@@ -94,7 +98,7 @@ class DisseminationResource(ModelResource):
         dissemination_id  = getattr(bundle.obj,'id')
         att_list = bundle.data.get('attendance_records')
         for att in att_list:
-            att = Attendance(dissemination_id=dissemination_id, person_id=att['person_id'], interested = att['interested'], expressed_question = att['expressed_question'])
+            att = Attendance(dissemination_id=dissemination_id, person_id=att['person_id'], liked = att['interested'], question_asked = att['question_asked'])
             att.save()
         return bundle
     
@@ -106,8 +110,8 @@ class DisseminationResource(ModelResource):
         att_list = bundle.data.get('attendance_records')
         for att in att_list:
             att = Attendance(dissemination_id=dissemination_id, person_id=att['person_id'], 
-                                              interested = att['interested'], 
-                                              expressed_question = att['expressed_question'])
+                                              liked = att['interested'], 
+                                              question_asked = att['question_asked'])
             att.save()    
         return bundle
     
@@ -117,8 +121,8 @@ class DisseminationResource(ModelResource):
     def dehydrate_attendance_records(self, bundle):
         return [{'person_id':att.person.id, 
                  'name': att.person.name, 
-                 'interested': att.interested, 
-                 'expressed_question': att.expressed_question, 
+                 'interested': att.liked, 
+                 'question_asked': att.question_asked, 
                  }  for att in bundle.obj.attendance_set.all()]
 
 

@@ -16,7 +16,8 @@ def foreign_key_to_id(bundle, field_name,sub_field_names):
 
 def dict_to_foreign_uri(bundle, field_name, resource_name=None):
     field_dict = bundle.data.get(field_name)
-    if field_dict.get('id'):
+    print field_dict
+    if field_dict:
         bundle.data[field_name] = "/coco/api/v1/%s/%s/"%(resource_name if resource_name else field_name, 
                                                     str(field_dict.get('id')))
     else:
@@ -24,12 +25,17 @@ def dict_to_foreign_uri(bundle, field_name, resource_name=None):
     return bundle
 
 def dict_to_foreign_uri_m2m(bundle, field_name, resource_name):
+    #print resource_name, bundle
+    #print field_name
     m2m_list = bundle.data.get(field_name)
     resource_uri_list = []
-    for item in m2m_list:
-        try:
-            resource_uri_list.append("/coco/api/v1/%s/%s/"%(resource_name, str(item.get('id'))))
-        except:
-            return bundle
+    print m2m_list
+    if m2m_list:
+        print 'in m2m list'
+        for item in m2m_list:
+            try:
+                resource_uri_list.append("/coco/api/v1/%s/%s/"%(resource_name, str(item.get('id'))))
+            except:
+                return bundle
     bundle.data[field_name] = resource_uri_list
     return bundle
