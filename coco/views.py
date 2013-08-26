@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, render
 
 def coco_v2(request):
-    return render(request,'dashboard.html')
+    return render(request,'path_mel.html')
     
 def login(request):
     if request.method == 'POST':
