@@ -72,7 +72,7 @@ define([
       if(!internet_connected())
           dfd.resolve();
           
-      $.post("/coco/logout/")
+      $.post("/pathmel/coco/logout/")
           .done(function(resp){
               return dfd.resolve();
           })
@@ -154,7 +154,7 @@ define([
       var dfd = new $.Deferred();
       if(!internet_connected())
           return dfd.resolve();
-      $.post("/coco/login/", { "username": username, "password": password } )
+      $.post("/pathmel/coco/login/", { "username": username, "password": password } )
           .done(function(resp){
               if(resp=="1")
                   return dfd.resolve();

@@ -7,7 +7,7 @@ function() {
         //string = key of this object in all_config, name of objectstore in IDB
         //for - accessing this object 
         
-        'rest_api_url': '/coco/api/v1/village/',
+        'rest_api_url': '/pathmel/coco/api/v1/village/',
         //string - the rest url for this entity
     
         'dashboard_display': {
@@ -123,7 +123,7 @@ function() {
         'edit_template_name': 'village_add_edit_template',
         'list_table_header_template': 'village_table_template', 
         'list_table_row_template': 'village_list_item_template',
-        'rest_api_url': '/coco/api/v1/village/',
+        'rest_api_url': '/pathmel/coco/api/v1/village/',
         'entity_name': 'village',
         'sort_field': 'name'
     };
@@ -134,7 +134,7 @@ function() {
         'list_table_row_template': 'mediator_list_item_template',
         'add_template_name': 'mediator_add_edit_template',
         'edit_template_name': 'mediator_add_edit_template',
-        'rest_api_url': '/coco/api/v1/mediator/',
+        'rest_api_url': '/pathmel/coco/api/v1/mediator/',
         'entity_name': 'mediator',
         'unique_together_fields': ['name'],
         'sort_field': 'name',
@@ -194,7 +194,7 @@ function() {
         'list_table_row_template': 'video_list_item_template',
         'add_template_name': 'video_add_edit_template',
         'edit_template_name': 'video_add_edit_template',
-        'rest_api_url': '/coco/api/v1/video/',
+        'rest_api_url': '/pathmel/coco/api/v1/video/',
         'entity_name': 'video',
         'unique_together_fields': ['title'],
         'sort_field': 'title',
@@ -243,7 +243,7 @@ function() {
         'list_table_row_template': 'dissemination_list_item_template',
         'add_template_name': 'dissemination_add_edit_template',
         'edit_template_name': 'dissemination_add_edit_template',
-        'rest_api_url': '/coco/api/v1/dissemination/',
+        'rest_api_url': '/pathmel/coco/api/v1/dissemination/',
         'entity_name': 'dissemination',
         download_chunk_size: 1000,
         'unique_together_fields': ['date', 'start_time', 'end_time', 'village.id', 'mediator.id'],
@@ -350,7 +350,7 @@ function() {
         'list_table_row_template': 'adoption_list_item_template',
         'add_template_name': 'adoption_add_template',
         'edit_template_name': 'adoption_edit_template',
-        'rest_api_url': '/coco/api/v1/adoption/',
+        'rest_api_url': '/pathmel/coco/api/v1/adoption/',
         'entity_name': 'adoption',
         'inc_table_name': 'adoption',
         'unique_together_fields': ['person.id', 'date'],
@@ -412,7 +412,7 @@ function() {
         'list_table_row_template': 'person_list_item_template',
         'add_template_name': 'person_add_edit_template',
         'edit_template_name': 'person_add_edit_template',
-        'rest_api_url': '/coco/api/v1/person/',
+        'rest_api_url': '/pathmel/coco/api/v1/person/',
         'entity_name': 'person',
         'foreign_entities': {
             'village': {
