@@ -64,14 +64,15 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/media/'
+STATIC_URL = '/media/pathmel/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_PATH, 'media'),
+    os.path.join(PROJECT_PATH, 'media/'),
+    os.path.join(PROJECT_PATH, 'media/pathmel/'),
 )
 
 # List of finder classes that know how to find static files in
