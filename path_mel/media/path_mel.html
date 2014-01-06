@@ -1,21 +1,21 @@
 <!DOCTYPE HTML>
-<!-- manifest="/media/coco/cocooffline.appcache" -->
-<html xml:lang="en-us" xmlns="http://www.w3.org/1999/xhtml" lang="en-us" manifest="/media/coco/cocooffline.appcache">
+<!-- manifest="{{STATIC_URL}}coco/cocooffline.appcache" -->
+<html xml:lang="en-us" xmlns="http://www.w3.org/1999/xhtml" lang="en-us" manifest="{{STATIC_URL}}coco/cocooffline.appcache">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
 
 	<title>Dashboard</title>
-	<link rel="stylesheet"  href="/media/coco/app/scripts/libs/datatablejs_media/css/demo_table.css">
-	<link rel="stylesheet" href="/media/coco/app/scripts/libs/bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" href="/media/coco/app/scripts/libs/chosen/chosen.css">
-	<link rel="stylesheet"  href="/media/coco/app/scripts/libs/bootstrap/css/bootstrap-responsive.css">
-	<link rel="stylesheet"  href="/media/coco/app/styles/css/coco.css">
-	<link rel="stylesheet"  href="/media/coco/app/styles/css/datepicker.css">
-	<link rel="stylesheet"  href="/media/coco/app/styles/css/bootstrap-timepicker.css">
-	<link rel="stylesheet"  href="/media/coco/app/styles/css/bootstrap-timepicker.css">
+	<link rel="stylesheet"  href="{{STATIC_URL}}coco/app/scripts/libs/datatablejs_media/css/demo_table.css">
+	<link rel="stylesheet" href="{{STATIC_URL}}coco/app/scripts/libs/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="{{STATIC_URL}}coco/app/scripts/libs/chosen/chosen.css">
+	<link rel="stylesheet"  href="{{STATIC_URL}}coco/app/scripts/libs/bootstrap/css/bootstrap-responsive.css">
+	<link rel="stylesheet"  href="{{STATIC_URL}}coco/app/styles/css/coco.css">
+	<link rel="stylesheet"  href="{{STATIC_URL}}coco/app/styles/css/datepicker.css">
+	<link rel="stylesheet"  href="{{STATIC_URL}}coco/app/styles/css/bootstrap-timepicker.css">
+	<link rel="stylesheet"  href="{{STATIC_URL}}coco/app/styles/css/bootstrap-timepicker.css">
     
-    <script data-main="/media/coco/dist/scripts/main" src="/media/coco/app/scripts/libs/require.js"></script>
+    <script data-main="{{STATIC_URL}}coco/dist/scripts/main" src="{{STATIC_URL}}coco/app/scripts/libs/require.js"></script>
 	
 	
 	<meta name="robots" content="NONE,NOARCHIVE">
@@ -146,8 +146,8 @@
 		<table border = '0'>
 			<tr>
 				<td style="vertical-align:top;"><div>
-					<img id= "online" src="/media/coco/app/images/online.png" title= "You are online"/>
-					<img id= "offline" src="/media/coco/app/images/offline.png" title= "You are offline"/>
+					<img id= "online" src="{{STATIC_URL}}coco/app/images/online.png" title= "You are online"/>
+					<img id= "offline" src="{{STATIC_URL}}coco/app/images/offline.png" title= "You are offline"/>
 				</div></td>
 				<td>
 					<div id="coco_userinfo">
@@ -202,7 +202,7 @@
 	</div>
 	<div class="media">
 		<a class="pull-left">
-		<img class="media-object" src="/media/coco/app/images/add.png" style = "width:70px;">
+		<img class="media-object" src="{{STATIC_URL}}coco/app/images/add.png" style = "width:70px;">
 		</a>
 		<div class="media-body">
 		<h5 class="media-heading">Add data</h5>
@@ -212,7 +212,7 @@
 
 	<div class="media">
 		<a class="pull-left">
-		<img class="media-object" src="/media/coco/app/images/table.png" style = "width:70px;">
+		<img class="media-object" src="{{STATIC_URL}}coco/app/images/table.png" style = "width:70px;">
 		</a>
 		<div class="media-body">
 		<h5 class="media-heading">View Data</h5>
@@ -222,7 +222,7 @@
 
 	<div class="media">
 		<a class="pull-left">
-		<img class="media-object" src="/media/coco/app/images/sync.png" style = "width:70px;">
+		<img class="media-object" src="{{STATIC_URL}}coco/app/images/sync.png" style = "width:70px;">
 		</a>
 		<div class="media-body">
 		<h5 class="media-heading"> Sync data</h5>
@@ -235,7 +235,7 @@
 
 	<div class="media">
 		<a class="pull-left">
-		<img class="media-object" src="/media/coco/app/images/feedback.png" style = "width:70px;">
+		<img class="media-object" src="{{STATIC_URL}}coco/app/images/feedback.png" style = "width:70px;">
 		</a>
 		<div class="media-body">
 		<h5 class="media-heading"> We value your feedback</h5>
@@ -345,7 +345,7 @@
            </thead>
        </table>
 	</div>
-	<div id="loaderimg"><img src="/media/coco/app/images/loading_text.gif" /></div>
+	<div id="loaderimg"><img src="{{STATIC_URL}}coco/app/images/loading_text.gif" /></div>
 
 	<p id="sort-helptext" style="margin-top:50px; font-size:11px; color:grey; font-style:italic; display:none;">
 	For multiple column sorting, press and hold the shift key while sorting each column.
