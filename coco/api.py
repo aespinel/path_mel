@@ -104,7 +104,7 @@ class DisseminationResource(ModelResource):
     
     def obj_update(self, bundle, **kwargs):
         #Edit case many to many handling. First clear out the previous related objects and create new objects
-        bundle = super(ScreeningResource, self).obj_update(bundle, **kwargs)
+        bundle = super(DisseminationResource, self).obj_update(bundle, **kwargs)
         dissemination_id = bundle.data.get('id')
         del_objs = Attendance.objects.filter(dissemination_id=dissemination_id).delete()
         att_list = bundle.data.get('attendance_records')
