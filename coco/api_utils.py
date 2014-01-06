@@ -18,7 +18,7 @@ def dict_to_foreign_uri(bundle, field_name, resource_name=None):
     field_dict = bundle.data.get(field_name)
     print field_dict
     if field_dict:
-        bundle.data[field_name] = "/coco/api/v1/%s/%s/"%(resource_name if resource_name else field_name, 
+        bundle.data[field_name] = "/pathmel/coco/api/v1/%s/%s/"%(resource_name if resource_name else field_name, 
                                                     str(field_dict.get('id')))
     else:
         bundle.data[field_name] = None
@@ -34,7 +34,7 @@ def dict_to_foreign_uri_m2m(bundle, field_name, resource_name):
         print 'in m2m list'
         for item in m2m_list:
             try:
-                resource_uri_list.append("/coco/api/v1/%s/%s/"%(resource_name, str(item.get('id'))))
+                resource_uri_list.append("/pathmel/coco/api/v1/%s/%s/"%(resource_name, str(item.get('id'))))
             except:
                 return bundle
     bundle.data[field_name] = resource_uri_list
